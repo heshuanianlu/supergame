@@ -34,12 +34,13 @@ function initEventHandle() {
     };
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
+        console.log(result);
         for (key in result) {
             if (key == 'error') {
                 var error=result['error'];
                 $('#tip>p').text(error);
                 setTimeout(function () { $('#tip>p').text('') }, 3000);  // 打印服务端返回的数据
-            } else if (key == 'message') {
+            } else if (key == 'result') {
                 var message=result['command'];
                 if (message=='change'){
                     var users=result['user_id'];
