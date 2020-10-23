@@ -13,26 +13,26 @@ class Server(object):
         self.ready = []
         # self.ready = {}
 
-    def get_message(self, message: str, user, websocket):
+    def get_message(self, message: str, self_id, websocket):
         message = message.split('=')
         if message[0] == 'connect':  # connect=my_id
-            message, client_list = self.connect(user.id, websocket)
+            message, client_list = self.connect(self_id, websocket)
         elif message[0] == 'choose':  # choose=0
             user_id = int(message[1])
-            message, client_list = self.choose(user.id, user_id)
+            message, client_list = self.choose(self_id, user_id)
         elif message[0] == 'agree=':  # agree=0
             user_id = int(message[1])
-            message, client_list = self.agree(user.id, user_id)
+            message, client_list = self.agree(self_id, user_id)
         elif message[0] == 'refuse':  # refuse=0
             user_id = int(message[1])
-            message, client_list = self.refuse(user.id, user_id)
+            message, client_list = self.refuse(self_id, user_id)
         elif message[0] == 'action':  # action=0*8&14&15&牌
             room_id, piece, position, card_name = message[1].split('&')
-            message, client_list = self.action(user.id, room_id, piece, position, card_name)
+            message, client_list = self.action(self_id, room_id, piece, position, card_name)
         elif message[0] == 'quit':  # quit=my_id
-            message, client_list = self.close(user.id)
+            message, client_list = self.close(self_id)
         else:
-            message, client_list = '无效消息', [self.client[user.id]]
+            message, client_list = '无效消息', [self.client[self_id]]
         return message, client_list
 
     def connect(self, self_id, websocket):
@@ -117,7 +117,7 @@ class Server(object):
         return message, [self.client[self_id]]
 
     def change(self, self_id):
-        message = []
+        """返回所有成员"""
         for user_id in self.hall:
             if user_id != self_id:
                 self.client[user_id].send(json.dumps({'hall': self.hall}).encode())

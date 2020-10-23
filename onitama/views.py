@@ -40,10 +40,9 @@ def connect(request):
         else:
             server.client[user_id] = request.websocket
             message = message.decode()[2: -2]
-            user = User.objects.get(user_id=user_id)
 
             # 可能会报错，报错返回错误原因
-            message, client_list = server.get_message(message, user, request.websocket)
+            message, client_list = server.get_message(message, user_id, request.websocket)
 
             for _ in client_list:
                 server.client[_].send(json.dumps({"result": message}).encode())
