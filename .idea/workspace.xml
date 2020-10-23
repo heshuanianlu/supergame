@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/supergame.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/consumables/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/migrations/0002_auto_20200914_1102.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equipments/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/append.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/change.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/fight.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/find.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/game.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/host.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/role.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/store.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/templates/game/user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroes/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/act_gif/一见生财.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/act_gif/天下太平.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/act_gif/牛头.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/act_gif/马面.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/img/niutou.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/img/一见生财.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/img/天下太平.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/img/牛头.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/equipment/img/马面.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/none.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/none.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/none/none.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/none/none.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/portrait/none.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/portrait/timg.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monsters/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/._introduce.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/introduce.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/main/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/main/content.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/main/deal.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/main/fight.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/一见发财.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/上清酒壶.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/东逝水.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/丝袜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/乱世功臣.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/云.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/倒福.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/倾国倾城.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/兜率鞭.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/入梦.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/八卦盘.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/六气之辩.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/冬梅缀.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/冰河.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/北雪飞.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/单子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/南木灰.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/双飞鸳鸯.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/发鞭.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/变身面具.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/口罩.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/右护腕.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/哀转.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/噙者之面.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/四季肘.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/四方膝.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/国色.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/夏落水.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/夕阳.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/天下太平.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/天地之正.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/天香.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/头盔.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/姜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/孤鹜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/安胃之枕.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/山.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/左护腕.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/幻脑之杖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/折磨.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/护肘.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/护膝.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/招魂幡.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/断肠剑.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/日月璀璨.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/时间转盘.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/明肾双刀之右.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/明肾双刀之左.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/星云面甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/春花蕊.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/朝阳.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/比心之刃.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/毯子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/气冲斗牛.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/汉服.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/沉鱼落雁.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/沧海.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/河.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/泣血之殇.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/洛丽塔.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/流星.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/海月明.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/游无穷.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/滑板鞋.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/灭法巫师之帽.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/灼阳之眼.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/热水瓶.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/焚月之镜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/牛头.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/狗嘴.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/玉生烟.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/珠有泪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/田日暖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊传单.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊头套.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊披风.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊拐杖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊眼镜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊腰带.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊衣服.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊袖套.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊裤子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/皮皮熊鞋子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/破髓鞭.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/碧玉赤足.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/秋果胚.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/秋水.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/空谷幽兰.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/空间魔方.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/纸盒.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/绝代佳人.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/肝盾.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/肺眠.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/背甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/胸甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/脾甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/腰刀.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/腰带.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/腰鼓.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/腿甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/臂甲.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/落霞.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/葱.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/蒜.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/裂股之枪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/西沙堆.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/象牙.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/边域将领.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是剑.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是帽子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是披肩.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是盾.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是衣服.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是裤子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/这是鞋子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/铁马.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/长天.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/闭月羞花.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/零落.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/霓裳羽衣.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/风.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/马面.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/鲲盾.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/鲲鹏足具.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/鹏枪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/黄昏.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/equipment/黎明.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/hero.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/三只狗.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/三头犬.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/两只野猪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/佣兵.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/佣兵队长.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/克隆怪物.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/刺客.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/史莱姆.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/哥布林.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/哥布林皇后.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/哥布林皇帝.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/四不像.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/地精.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/大人物.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/大人物的保镖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/大哥布林.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/宝箱怪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/小偷.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/小哥布林.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/巨人.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/巨人首领.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/树精.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/歌姬.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/熊孩子.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/猪妖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/猫妖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/矮人.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/矮人王.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/石妖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/科学家.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/老前辈.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/舞女.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/花妖.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/虚无之壁.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/蜂窝.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/被感染的哥布林.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/野猪.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/食人花.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/骑士.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/monster/魔鬼.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/ready/savees.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myclass/test/write card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx_conf/.jingtai.conf.swp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx_conf/default" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx_conf/supergame_nginx.conf.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/piece.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/player.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/room.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/connect/write card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/templates/onitama/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/onitama/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/font/fankai.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/font/jiankai.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/font/mofeng.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/exit.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/fight.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/game.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/game.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/host.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/info.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/image/store.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/background.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/兔.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/牛.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/猪.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/猿.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/虎.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/蛇.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/蛙.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/螳螂.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/蟹.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/象.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/马.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/鳗.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/鸡.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/鹅.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/鹤.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card/龙.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/all.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/兔.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/牛.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/猪.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/猿.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/虎.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/蛇.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/蛙.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/螳螂.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/蟹.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/象.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/马.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/鳗.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/鸡.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/鹅.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/鹤.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/card_bak/龙.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/other/timg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/other/timg0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/other/yangpi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/script/info.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/onitama/script/websocket.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/title/-back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/title/-body.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/title/-head.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/title/-tail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/title/hanpi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/tools/font.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/tools/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/tools/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/tools/vue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supergame/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supergame/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supergame/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supergame/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supergame/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supermidou/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/views_.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uwsgi/uwsgi.pid" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JupyterTrust" id="1f667378-c995-4aca-8c11-fa983374208a" />
+  <component name="ProjectId" id="1Y0iHj1dsxXQHwNqHsrFqV9qmw9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/onitama" />
+      <recent name="$PROJECT_DIR$/onitama/templates/onitama" />
+      <recent name="C:\Users\heshu\Desktop\project\supergame\myclass\yx" />
+      <recent name="C:\Users\heshu\Desktop\project\supergame\heroes" />
+      <recent name="C:\Users\heshu\Desktop\project\supergame\myclass" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.write card (1)">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\heshu\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\heshu\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/myclass/yx/basic" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\heshu\Desktop\project\supergame\myclass\yx\map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="room" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\heshu\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/onitama/connect" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/onitama/connect/room.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="savees" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="supergame.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/myclass/yx/basic" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\heshu\Desktop\project\supergame\myclass\yx\savees.py" />
+      <option name="PARAMETERS" value="runserver 127.0.0.1:8000" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="write card (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\heshu\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/onitama/connect" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/onitama/connect/write card.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="write card" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\heshu\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/myclass/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myclass/test/write card.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="supergame" type="Python.DjangoServer" factoryName="Django server">
+      <module name="supergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.map" />
+      <item itemvalue="Python.room" />
+      <item itemvalue="Python.savees" />
+      <item itemvalue="Python.write card (1)" />
+      <item itemvalue="Python.write card" />
+      <item itemvalue="Django Server.supergame" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.write card" />
+        <item itemvalue="Python.write card (1)" />
+        <item itemvalue="Python.savees" />
+        <item itemvalue="Python.room" />
+        <item itemvalue="Python.map" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="" />
+      <created>1582085826424</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582085826424</updated>
+      <workItem from="1582085829019" duration="7031000" />
+      <workItem from="1582773660129" duration="20641000" />
+      <workItem from="1583115532103" duration="19399000" />
+      <workItem from="1583197551429" duration="5225000" />
+      <workItem from="1583202882784" duration="12895000" />
+      <workItem from="1583288035325" duration="18467000" />
+      <workItem from="1583372309428" duration="20927000" />
+      <workItem from="1583457254678" duration="12867000" />
+      <workItem from="1583716305632" duration="20568000" />
+      <workItem from="1583803762955" duration="6178000" />
+      <workItem from="1583976912549" duration="10265000" />
+      <workItem from="1583994737682" duration="2789000" />
+      <workItem from="1584064289199" duration="9774000" />
+      <workItem from="1584320802709" duration="12926000" />
+      <workItem from="1584410820456" duration="11344000" />
+      <workItem from="1584494012328" duration="9795000" />
+      <workItem from="1584581052080" duration="22790000" />
+      <workItem from="1584667654861" duration="7168000" />
+      <workItem from="1584930137538" duration="2132000" />
+      <workItem from="1585011995626" duration="6822000" />
+      <workItem from="1585039739857" duration="6406000" />
+      <workItem from="1585103515571" duration="10670000" />
+      <workItem from="1585271050976" duration="19540000" />
+      <workItem from="1586315006522" duration="69000" />
+      <workItem from="1589776942953" duration="1075000" />
+      <workItem from="1589778789416" duration="115000" />
+      <workItem from="1589778906168" duration="686000" />
+      <workItem from="1589782328846" duration="82000" />
+      <workItem from="1589782429547" duration="9837000" />
+      <workItem from="1589936952737" duration="1208000" />
+      <workItem from="1590484587147" duration="1001000" />
+      <workItem from="1601363658376" duration="615000" />
+      <workItem from="1601364358013" duration="1695000" />
+      <workItem from="1601366292280" duration="7019000" />
+      <workItem from="1601517985587" duration="11224000" />
+      <workItem from="1603085334526" duration="1437000" />
+      <workItem from="1603159247187" duration="19108000" />
+      <workItem from="1603242742431" duration="3786000" />
+      <workItem from="1603249100913" duration="4560000" />
+      <workItem from="1603329176935" duration="4197000" />
+      <workItem from="1603352126984" duration="2311000" />
+      <workItem from="1603415436582" duration="11602000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="394" y="154" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1603248943522">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="328" y="143" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.800@0.0.1280.800" timestamp="1601364179771" />
+    <state x="394" y="154" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.864@0.0.1536.864" timestamp="1603248943522" />
+    <state x="626" y="177" key="EnvironmentVariablesDialog" timestamp="1603415496897">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="626" y="177" key="EnvironmentVariablesDialog/0.0.1536.864@0.0.1536.864" timestamp="1603415496897" />
+    <state x="635" y="320" key="Github.ShareDialog" timestamp="1603416702908">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="635" y="320" key="Github.ShareDialog/0.0.1536.864@0.0.1536.864" timestamp="1603416702908" />
+    <state x="587" y="131" key="Github.UntrackedFilesDialog" timestamp="1603416728646">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="587" y="131" key="Github.UntrackedFilesDialog/0.0.1536.864@0.0.1536.864" timestamp="1603416728646" />
+    <state width="1492" height="306" key="GridCell.Tab.0.bottom" timestamp="1603248989001">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1601368233016" />
+    <state width="1492" height="306" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603248989001" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1601378409108" />
+    <state width="1492" height="306" key="GridCell.Tab.0.center" timestamp="1603248989001">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1601368233015" />
+    <state width="1492" height="306" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1603248989001" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1601378409107" />
+    <state width="1492" height="306" key="GridCell.Tab.0.left" timestamp="1603248989001">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1601368233014" />
+    <state width="1492" height="306" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1603248989001" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1601378409105" />
+    <state width="1492" height="306" key="GridCell.Tab.0.right" timestamp="1603248989001">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1601368233016" />
+    <state width="1492" height="306" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1603248989001" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1601378409107" />
+    <state width="1492" height="277" key="GridCell.Tab.1.bottom" timestamp="1603186242675">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603186242675" />
+    <state width="1492" height="277" key="GridCell.Tab.1.center" timestamp="1603186242675">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1603186242675" />
+    <state width="1492" height="277" key="GridCell.Tab.1.left" timestamp="1603186242675">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1603186242675" />
+    <state width="1492" height="277" key="GridCell.Tab.1.right" timestamp="1603186242675">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1603186242675" />
+    <state x="270" y="76" key="SettingsEditor" timestamp="1603417272369">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603417272369" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603437877502">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603437877502" />
+    <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1603417181641" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1601366263036">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1601366263036" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/supergame$write_card__1_.coverage" NAME="write card (1) Coverage Results" MODIFIED="1603245598562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/onitama/connect" />
+    <SUITE FILE_PATH="coverage/supergame$room.coverage" NAME="room Coverage Results" MODIFIED="1601368206962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/onitama/connect" />
+    <SUITE FILE_PATH="coverage/supergame$write_card.coverage" NAME="write card Coverage Results" MODIFIED="1603160635290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myclass/test" />
+    <SUITE FILE_PATH="coverage/supergame$savees.coverage" NAME="savees Coverage Results" MODIFIED="1582787194916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myclass/yx/basic" />
+    <SUITE FILE_PATH="coverage/supergame$map.coverage" NAME="map Coverage Results" MODIFIED="1583117744181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myclass/yx/basic" />
+  </component>
+</project>

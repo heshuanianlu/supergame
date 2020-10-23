@@ -1,0 +1,321 @@
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+*{
+    font-family: 'mofeng';
+}
+div#hero{
+    width: 200px;
+    height: 500px;
+    border: 1px solid red;
+}
+div#create{
+    display: none;
+}
+div.menu{
+    height: 80%;
+    border: 1px solid transparent;
+    background-image: url("/static/image/background.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+div.menu>h2{
+    text-align: center;
+    font-size: 36px;
+    height: 100px;
+    line-height: 100px;
+    background-color: rgba(75, 19, 19, 0.712);
+    position: relative;
+}
+div.button{
+    height: 60px;
+    border: 1px solid black;
+    height: 20%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(75, 19, 19);
+}
+div>button{
+    width: 80px;
+    height: 40%;
+    width: 20%;
+    margin: 5%;
+    font-size: 24px;
+    background-color: #aaa;
+    border-radius: 100px;
+    border: 1px solid black;
+    outline: none;
+    transition: none;
+}
+div>button:hover{
+    background-color: white; 
+}
+div>button:active{
+    border: 3px solid white;
+    color: white;
+    background-color: black;
+}
+
+#choose ul{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+}
+#choose ul>li.hero{
+    width: 160px;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+#choose ul>li.hero>figure{
+    width: 100%;
+    height: 200px;
+    border: none;
+    padding: 10px;
+    border-right: 2px dotted #ccc;
+    border-left: 2px dotted #ccc;
+}
+#choose ul>li.hero:hover>figure{
+    background-color: rgba(0,0,0,0.3);
+}
+#choose ul>li.hero>figure>img{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+#choose ul>li.hero>div{
+    height: 70px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px dotted #ccc;
+    border-top: none;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+#choose ul>li.hero:hover>div{
+    background-color: rgba(0,0,0,0.3);
+}
+
+#create ul{
+    overflow: hidden;
+    float: left;
+    width: 360px;
+    height: 400px;
+    text-align: center;
+    border: 1px solid transparent;
+    margin: 30px 60px;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#create ul>li.img{
+    border: 6px solid black;
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin: 10px;
+}
+#create ul>li.img>img{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+#create>.menu>div:nth-child(3){
+    float: left;
+    width: 600px;
+    margin: 15px -30px;
+}
+#create div>div.gif{
+    display: none;
+    margin: auto;
+    width: 420px;
+    height: 420px;
+}
+#create div.gif>img{
+    width: 400px;
+    height: 400px;
+}
+#create>.menu>div:nth-child(4){
+    float: left;
+    border: 1px solid transparent;
+    margin: 120px 0;
+    height: 60px;
+    width: 200px;
+    color: white;
+}
+#create>.menu>div:nth-child(4)>input{
+    width: 100%;
+    height: 30px;
+    background-color: #333;
+    color: white;
+    border: 1px solid black;
+}
+#create>.menu>div:nth-child(4)>input:hover{
+    border: 1px solid white;
+}
+</style>
+
+{% load static %}
+
+<div>
+    <div id="choose">
+        <div class="menu">
+            <h2>选择</h2>
+            <div>
+                <ul>
+                    {% for hero in heroes_created %}
+                        <li class="hero">
+                            <figure>
+                                <img src="/media/{{ hero.hero.action }}">
+                            </figure>
+                            <div>
+                                <p>{{ hero.name }}</p>
+                                <p>{{ hero.hero.pos }}</p>
+                                <p>lv.{{ hero.lv }}</p>
+                            </div>
+                            <input type="hidden" value="{{ hero.id }}">
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="button">
+            <button>创建新角色</button>
+            <button>选择此角色</button>
+            <button>删除此角色</button>
+        </div>
+    </div>
+    {% csrf_token %}
+    <div id="create">
+        <div class="menu">
+            <h2>创建</h2>
+            <ul>
+                {% for hero in heroes %}
+                    <li class="img">
+                        <img src="/media/{{ hero.cover }}">
+                    </li>
+                {% endfor %}
+            </ul>
+            <div>
+                {% for hero in heroes %}
+                    <div class="gif">
+                        <h3>{{ hero.sex }} {{ hero.pos }}</h3>
+                        <img src="/media/{{ hero.action }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <label for="name">请输入角色名称：</label>
+                <input type="text" id="name">
+            </div>
+        </div>
+        <div class="button">
+            <button>取消创建</button>
+            <button>确认创建</button>
+        </div>
+    </div>
+</div>
+
+<script src="/static/tools/jquery.js"></script>
+<script>
+$("body").css("width",$(window).width()).css("height",$(window).height());
+$("button").click(function(){
+    if ($(this).text()=='创建新角色'){
+        $("#create").css("display","block")
+        $("#choose").css("display","none")
+    }else if($(this).text()=='取消创建'){
+        $("#create").css("display","none")
+        $("#choose").css("display","block")
+    }else if($(this).text()=='确认创建'){
+        name=$("#name").val();
+        sex_pos='';
+        for (var i=0;i<$(".gif").length;i++){
+            if ($($(".gif")[i]).css("display")=="block"){
+                sex_pos=$($(".gif")[i]).children("h3").text().split(' ');
+            }
+        }
+        if (name==''){
+            alert("请输入昵称");
+        }else if(sex_pos==''){
+            alert("请选择创建的角色")
+        }else{
+            csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+            $.ajax({
+                type:'post',
+                url:'/game/role',
+                data:'action=create&name='+name+"&pos="+sex_pos[1]+"&sex="+sex_pos[0]+"&csrfmiddlewaretoken="+csrf,
+                dataType:'json',
+                success:function(result){
+                    alert(result.tip);
+                    location.reload();
+                }
+            })
+        }
+    }else if($(this).text()=='删除此角色'){
+        csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        if ($(".selected_hero").length){
+            $.ajax({
+                type:'post',
+                url:'/game/role',
+                data:"action=delete&hero_id="+$(".selected_hero").children("input").val()+"&csrfmiddlewaretoken="+csrf,
+                dataType:'json',
+                success:function(result){
+                    alert(result.tip);
+                    location.reload();
+                }
+            })
+        }else{
+            alert("请选择一个角色！")
+        }
+    }else if($(this).text()=='选择此角色'){
+        csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        if ($(".selected_hero").length){
+            $.ajax({
+                type:'post',
+                url:'/game/role',
+                data:"action=enter&hero_id="+$(".selected_hero").children("input").val()+"&csrfmiddlewaretoken="+csrf,
+                dataType:'json',
+                success:function(result){
+                    // alert(result.tip);
+                    location.replace("/game/host");
+                }
+            })
+        }else{
+            alert("请选择一个角色！")
+        }
+    }
+})
+$(".img").click(function(){
+    for (var i=0;i<$(".gif").length;i++){
+        if (i==$(this).index()){
+            $(".gif").eq(i).css("display","block");
+            $(".img").eq(i).css("border-color","white")
+        }else{
+            $(".gif").eq(i).css("display","none");
+            $(".img").eq(i).css("border-color","black")
+        }
+    }
+})
+$(".hero").click(function(){
+    for (var i=0;i<$(".hero").length;i++){
+        if (i==$(this).index()){
+            $(".hero").eq(i).addClass("selected_hero")
+            .children("figure").css("border-right","2px solid gold").css("border-left","2px solid gold")
+            .next("div").css("border","2px solid gold").css("border-top","none").css("color","white");
+        }else{
+            $(".hero").eq(i).removeClass("selected_hero")
+            .children("figure").css("border-right","2px dotted #ccc").css("border-left","2px dotted #ccc")
+            .next("div").css("border","2px dotted #ccc").css("border-top","none").css("color","black")
+        }
+    }
+})
+</script>

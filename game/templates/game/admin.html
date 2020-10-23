@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员入口</title>
+    <link rel="shortcut icon" href="/static/title/hanpi.jpg">
+    <link rel="stylesheet" href="/static/tools/font.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'fankai';
+        }
+        body>div{
+            width: 800px;
+            margin: 100px auto;
+            /* border: 3px solid #ccc; */
+            border-radius: 40px;
+        }
+        form{
+            border: 3px solid #bbb;
+            border-radius: 30px;
+            padding: 30px;
+            width: 500px;
+            margin: 30px auto;
+        }
+        table{
+            border: 3px solid #bbb;
+            border-collapse: collapse;
+            margin: 30px auto;
+        }
+        label{
+            display: inline-block;
+            width: 130px;
+            text-align: right;
+        }
+        h2{
+            margin: 50px auto 0;
+            text-align: center;
+            /* border-bottom: 1px solid #ddd; */
+            width: 500px;
+        }
+        input{
+            height: 24px;
+            margin: 15px 0;
+            padding-left: 5px;
+        }
+        input#phone{
+            width: 200px;
+        }
+        input#pin{
+            width: 100px;
+        }
+        span#button{
+            display: inline-block;
+            text-align: center;
+            color: purple;
+            cursor: pointer;
+            width: 100px;
+            text-align: center;
+            /* border: 1px solid red; */
+        }
+        span#button:hover{
+            color: gold;
+        }
+        span#button:active{
+            text-emphasis: none;
+        }
+        input#submit{
+            width: 80px;
+            padding: 0;
+        }
+        span#tip{
+            color: red;
+        }
+        tr{
+            height: 40px;
+        }
+        tr>td{
+            width: 100px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+    </style>
+    <script src="/static/tools/jquery.js"></script>
+</head>
+<body>
+    {% if not admin %}
+    <div>
+        <h2>管理员验证</h2>
+        <form action="/admin_check" method="POST">
+            <label for="phone">手机号：</label>
+            <input type="text" id="phone" name="phone">
+            <br>
+            <label for="pin">验证码：</label>
+            <input type="password" id="pin" name="pin">
+            <span id="button">点击发送</span>
+            <br>
+            <label></label>
+            <input type="submit" value="验证" id='submit'>
+            <span id="tip">{{ tip }}</span>
+            {% csrf_token %}
+        </form>
+    </div>
+    <script>
+        $('#button').click(function(){
+            if($('#phone').val().length!==11){
+                alert('请填写一个正确的手机号');
+            }else if($('#button').text()==='点击发送'){
+                var time=60;
+                $('#button').text('再次发送('+time+')').css('color','#ccc');
+                a=setInterval(function(){
+                    time-=1;
+                    $('#button').text('再次发送('+time+')').css('color','#ccc').attr("disable",1);
+                    if (time==0){
+                        $('#button').text('点击发送').css('color','purple').attr("disable",0);
+                        clearInterval(a);
+                    }
+                },1000)
+                csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+                $.ajax({
+                    type:'post',
+                    url:'/admin_check',
+                    data:'action=phone&phone='+$('#phone').val()+"&csrfmiddlewaretoken="+csrf,
+                })
+            }
+        })
+    </script>
+    {% else %}
+    <div>
+        <table>
+            <tr>
+                <td></td>
+                <td id='monster'>怪物</td>
+                <td id='equipment'>装备</td>
+                <td id='hero'>英雄</td>
+                <td id='map'>地图</td>
+                <td id='consumable'>物品</td>
+            </tr>
+            <tr>
+                <td id='append'>增加</td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+            </tr>
+            <tr>
+                <td id='detail'>改动</td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+                <td><a>click</a></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        $("td>a").attr('href',function(){
+            return '/'+$(this).parent('td').parent('tr').children('td').eq(0).attr('id')+
+            '/'+$('tr').eq(0).children('td').eq($(this).parent('td').index()).attr('id');
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

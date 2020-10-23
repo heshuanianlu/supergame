@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>憨批GAME</title>
+    <link rel="shortcut icon" href="/static/title/hanpi.jpg">
+
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+    *{
+        font-family: 'fankai';
+    }
+    body{
+        background-color: rgb(182, 180, 180);
+        background-image: url('/static/image/game.jpg');
+    }
+    body>video{
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        bottom: 0;
+        right: 0;
+        z-index: -9999;
+        position: fixed;
+        /* -webkit-filter: grayscale(10%); */
+    }
+    body>div{
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        border: 1px solid transparent;
+    }
+    a{
+        color: black;
+    }
+    a:hover{
+        color: gold;
+    }
+    #an,#main{
+        float: left;
+        /* border: 1px solid black; */
+        margin: 2% 1%;
+        height: 90%;
+    }
+
+    #an{
+        width: 12%;
+        text-align: center;
+        font-size: 22px;
+        background-color: rgba(138, 110, 53, 0.356);
+        background-image: url("/static/title/-back.png");
+        background-size: cover;
+    }
+    #an ul>li{
+        padding: 5px 0;
+        cursor: pointer;
+    }
+    #an li>ul{
+        margin: 5px;
+        border: 1px solid transparent;
+        padding: 5px 0;
+    }
+    #an li>ul>li{
+        height: 38px;
+        background-size: cover;
+    }
+    .title_head{
+        font-weight: 700;
+        font-size: 24px;
+        background-image: url("/static/title/-head.png");
+    }
+    .title_body{
+        background-image: url("/static/title/-body.png");
+        transition: 0.7s;
+    }
+    .title_tail{
+        background-image: url("/static/title/-tail.png");
+        transition: 0.4s;
+    }
+
+    #main{
+        width: 84%;
+    }
+    #main>iframe{
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: white;
+    }
+
+    #beian{
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+{% load static %}
+
+<script src="/static/tools/jquery.js"></script>
+
+</head>
+<body scroll="no">
+
+<video autoplay loop muted>
+    <source  src="/static/image/game.mp4" type="video/mp4">
+</video>
+
+<div>
+    <div id="an">
+        <ul>
+            <li>
+                <ul>
+                    <li class="title_head log"><a>游戏入口</a></li>
+                    <li class="title_body log"><a href="/user/log" target="_blank">登入/登出</a></li>
+                    <li class="title_body log"><a href="/user/edit" target="_blank">修改信息</a></li>
+                    <li class="title_tail log"><a href="/user/register" target="_blank">注册新用户</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class="title_head game"><a>游戏内容</a></li>
+                    <li class="title_body game"><a href="/user/see" target="new">角色信息</a></li>
+                    <li class="title_body game"><a href="/detail/hero" target="new">英雄图鉴</a></li>
+                    <li class="title_body game"><a href="/detail/equipment" target="new">装备图鉴</a></li>
+                    <li class="title_body game"><a href="/detail/consumable" target="new">消耗品图鉴</a></li>
+                    <li class="title_body game"><a href="/detail/map" target="new">地图图鉴</a></li>
+                    <li class="title_body game"><a href="/detail/monster" target="new">怪物图鉴</a></li>
+                    <li class="title_tail game"><a href="" target="">背景故事</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class="title_head admin"><a>制作团队</a></li>
+                    <li class="title_body admin"><a href="/admin_check" target="admin">管理员入口</a></li>
+                    <li class="title_tail admin"><a href="" target="admin">关于我们</a></li>
+                </ul>
+            </li>
+            <li id="beian"><a href="http://beian.miit.gov.cn/" target="admin">晋ICP备19010731号-3</a></li>
+        </ul>
+    </div>
+    <div id="main">
+        <iframe src="/game/"></iframe>
+    </div>
+</div>
+
+</body>
+<script>
+$("body").css("width",$(window).width()).css("height",$(window).height());
+$(".title_head").click(function(){
+    if ($(this).nextAll("li").css("display")=="none"){
+        $(this).nextAll("li").css("display","block");
+    }else{
+        $(this).nextAll("li").css("display","none");
+    }
+})
+</script>
+</html>

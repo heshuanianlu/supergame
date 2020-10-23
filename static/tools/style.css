@@ -1,0 +1,105 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* transition: all 0.1s; */
+}
+body{
+    overflow: hidden;
+    background-image: url('/static/image/background.jpg');
+    background-size: cover;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+.顶{
+    border: 3px solid orange;
+}
+.高{
+    border: 3px solid blueviolet;
+}
+.中{
+    border: 3px solid blue;
+}
+.低{
+    border: 3px solid greenyellow;
+}
+.初{
+    border: 3px solid grey;
+}
+.equ{
+    float: left;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    margin: 5px 2px;
+    height: 45px;
+    width: 45px;
+    position: relative;
+    background-color: #ccc;
+}
+.顶:hover{
+    border: 2px solid rgba(255, 166, 0, 0.75);
+}
+.高:hover{
+    border: 2px solid rgba(137, 43, 226, 0.75);
+}
+.中:hover{
+    border: 2px solid rgba(0, 0, 255, 0.75);
+}
+.低:hover{
+    border: 2px solid rgba(172, 255, 47, 0.75);
+}
+.初:hover{
+    border: 2px solid rgba(128, 128, 128, 0.75);
+}
+.equ>img{
+    height: 100%;
+    width: 100%;
+}
+.equ>div{
+    display: none;
+    padding: 20px;
+    position: absolute;
+    left: 43px;
+    top: -2px;
+    z-index: 1;
+    background-color: rgb(153, 103, 27);
+    border: 3px solid brown;
+    width: 300px;
+}
+.equ:hover>div{
+    display: block;
+}
+
+p.gold{
+    color: gold;
+    text-align: right;
+}
+p.gold>span{
+    border: 2px solid gold;
+    background-color: goldenrod;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    text-align: center;
+    line-height: 18px;
+    box-sizing: content-box;
+}
+.equ>div>table{
+   margin: 10px 0;
+}
+.null{
+    float: left;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    margin: 5px 2px;
+    height: 45px;
+    width: 45px;
+    position: relative;
+    background-color: rgb(36, 35, 35);
+}

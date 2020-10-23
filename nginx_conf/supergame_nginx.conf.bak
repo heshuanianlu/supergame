@@ -1,0 +1,31 @@
+upstream django {
+    # server unix:///path/to/your/mysite/mysite.sock; # for a file socket
+    server 127.0.0.1:23333; # for a web port socket (we'll use this first)
+}
+
+# 配置nginx的请求
+server {
+    # the port your site will be served on
+    listen      80; # 端口号
+    # the domain name it will serve for
+    server_name heshuanianlu.top; # 域名或者ip地址
+    charset     utf-8;
+
+    # max upload size
+    client_max_body_size 75M;   # adjust to taste
+
+    # 媒体的存放路径
+    location /media  {
+        root /home/heshuanianlu/yigeproject/media;  # 你项目中的媒体存放路径(在本项目中创建一个media,使用pwd查看当前的位置)
+    }
+
+    location /static {
+        root /home/heshuanianlu/yigeproject/static; # 你项目中静态文件的存放路径
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location / {
+        uwsgi_pass  127.0.0.1:23333;
+        #include     /home/heshuanianlu/yigeproject/uwsgi_params; # 上一步你存放的uwsgi_params路径
+    }
+}

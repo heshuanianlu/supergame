@@ -1,0 +1,350 @@
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+*{
+    font-family: 'mofeng';
+}
+body{
+    background-image: url("/static/image/background.jpg");
+    background-size: cover;
+}
+body>div{
+    width: 1000px;
+    height: 550px;
+    margin: 50px auto;
+    border: 1px solid transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body>div#map{
+    flex-wrap: wrap;
+}
+button.select_map{
+    width: 260px;
+    height: 200px;
+    border: 2px solid rgba(165, 42, 42, 0.666);
+    margin: 0 50px;
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+button.select_map:hover{
+    border-width: 5px;
+}
+button.select_map:active{
+    border-width: 10px;
+}
+button.select_map>img{
+    width: 100%;
+    height: 80%;
+}
+button.select_map>p{
+    width: 100%;
+    height: 21%;
+    text-align: center;
+    background-color: burlywood;
+    font-size: 24px;
+    line-height: 40px;
+}
+div.detail_info{
+    opacity: 0;
+    border: 3px solid brown;
+    border-radius: 15px;
+    width: 300px;
+    height: 500px;
+    padding: 20px 30px;
+    background-color: white;
+}
+div.detail_info>p{
+    font-size: 14px;
+    height: 50px;
+}
+div.detail_info>figure{
+    margin: 10px auto;
+    border: 1px solid transparent;
+    text-align: center;
+}
+div.detail_info>figure>img{
+    width: 200px;
+    height: 250px;
+}
+div#floor_info{
+    border: 3px solid brown;
+    border-radius: 15px;
+    background-color: rgba(165, 42, 42, 0.678);
+    margin: 0 50px;
+    width: 300px;
+    height: 500px;
+}
+div#floor_info>h2{
+    text-align: center;
+    font-size: 32px;
+    margin: 15px auto;
+}
+div#floor_info>div#choose_action{
+    width: 160px;
+    height: 240px;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+div#floor_info>div#choose_action>button{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 10px auto;
+    background-color: #777;
+    outline: none;
+    border: 3px solid transparent;
+    border-radius: 20px;
+    color: white;
+}
+div#floor_info>div#choose_action>button:hover{
+    border-color: white;
+}
+div#floor_info>div#choose_action>button:active{
+    border-width: 10px;
+    font-size: 10px;
+}
+div#floor_info>p{
+    text-align: center;
+    font-size: 16px;
+    margin: 5px auto;
+    padding: 5px;
+}
+div#floor_info>div#choose_action>button.ready:nth-child(2),
+div#floor_info>div#choose_action>button.fight{
+    display: none;
+}
+
+.detail_info>table tr>td:nth-child(2){
+    width: 120px;
+}
+.status{
+    height: 14px;
+    width: 100%;
+    border: 1px solid brown;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 7px;
+    position: relative;
+    background-color: transparent;
+    z-index: 2;
+}
+.status>div{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 7px;
+}
+.red_hp>div{
+    background-color: red;
+}
+.blue_mp>div{
+    background-color: blue;
+}
+</style>
+{% load static %}
+
+{% if content == 'map' %}
+<div id="map">
+    <a href="/game/host">
+        <button class="select_map">
+            <img src="/static/image/host.jpg" alt="">
+            <p>返回大厅</p>
+        </button>
+    </a>
+    {% for map in maps %}
+    <a href="/game/fight?map_id={{ map.id }}">
+        <button class="select_map">
+            <img src="/media/{{ map.cover }}">
+            <p>{{ map.name }}</p>
+        </button>
+    </a>
+    {% endfor %}
+</div>
+{% elif content == 'monster' %}
+<div>
+    <div id="hero" class="detail_info">
+        <h3>名字</h3>
+        <p>介绍</p>
+        <table>
+            <tr><td>生命值：</td><td></td></tr>
+            <tr><td>法力值：</td><td></td></tr>
+            <tr><td>攻击力：</td><td></td></tr>
+            <tr><td>暴击概率：</td><td></td></tr>
+            <tr><td>暴击效果：</td><td></td></tr>
+            <tr><td>技能伤害：</td><td></td></tr>
+        </table>
+        <figure><img src="/media/{{ hero.hero.action }}"></figure>
+    </div>
+    <div id="floor_info">
+        <h2>{{ map.name }}第<span id="floor">0</span>层</h2>
+        <div id="choose_action">
+            <button class="ready">向前行动</button>
+            <button class="ready">返回大厅</button>
+            <button class="fight">攻击</button>
+            <button class="fight">技能</button>
+            <button class="fight">逃跑</button>
+            <button class="fight">防御</button>
+            {% csrf_token %}
+        </div>
+        <p>欢迎来到{{ map.name }}</p>
+    </div>
+    <div id="monster" class="detail_info">
+        <h3>名字</h3>
+        <p>介绍</p>
+        <table>
+            <tr><td>生命值：</td><td></td></tr>
+            <tr><td>法力值：</td><td></td></tr>
+            <tr><td>攻击力：</td><td></td></tr>
+            <tr><td>暴击概率：</td><td></td></tr>
+            <tr><td>暴击效果：</td><td></td></tr>
+            <tr><td>技能伤害：</td><td></td></tr>
+        </table>
+        <figure><img src="/media/{{ monster.action }}"></figure>
+    </div>
+</div>
+
+<script src="/static/tools/jquery.js"></script>
+<script>
+function fuYuan(){
+    a=setTimeout(function(){
+        $("#floor_info").children("p").text("{{ map.menu }}");
+    }, 5000)
+}fuYuan();
+function duTiao(){
+    $(".status").children("div").css("width", function(){
+        func=$(this).parent().text();
+        return eval(func)*100+'%';
+    });
+}
+$("#choose_action>button").click(function(){
+    csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    if ($(this).text()=='向前行动'){
+        $.ajax({
+            url:'/game/fight',
+            type:'post',
+            data:'action=continue'+'&csrfmiddlewaretoken='+csrf+"&map_id={{ map_id }}&floor="+$("#floor").text(),
+            dataType:'json',
+            success:function(result){
+                clearTimeout(a);
+                if (result.code==0){alert("奇怪的错误发生了！！！");return};
+                
+                monster=$("#monster").children("h3").text(result.monster['name'])
+                .next("p").text(result.monster['menu']).next("table");
+                monster.children("tbody").children("tr").eq(0).children("td").eq(1)
+                .html('<div class="red_hp status"><div></div>'
+                +"<span id='mon_HP'>"+result.monster['HP']+"</span>/"+result.monster['HP']+'</div>')
+                monster.children("tbody").children("tr").eq(1).children("td").eq(1)
+                .html('<div class="blue_mp status"><div></div>'
+                +"<span id='mon_MP'>"+result.monster['MP']+"</span>/"+result.monster['MP']+'</div>')
+                monster.children("tbody").children("tr").eq(2).children("td").eq(1).text(Math.round(Number(result.monster['att'])*100)/100);
+                monster.children("tbody").children("tr").eq(3).children("td").eq(1).text(Math.round(Number(result.monster['baoji'])*100)/100);
+                monster.children("tbody").children("tr").eq(4).children("td").eq(1).text(Math.round(Number(result.monster['xiaoguo'])*100)/100);
+                monster.children("tbody").children("tr").eq(5).children("td").eq(1).text(Math.round(Number(result.monster['shanghai'])*100)/100);
+                monster.next("figure").children("img").attr("src","/media/"+result.monster['img']);
+
+                hero=$("#hero").children("h3").text(result.hero['name'])
+                .next("p").text(result.hero['menu']).next("table");
+                hero.children("tbody").children("tr").eq(0).children("td").eq(1)
+                .html('<div class="red_hp status"><div></div>'
+                +"<span id='hero_HP'>"+result.hero['now_HP']+"</span>/"+result.hero['HP']+'</div>')
+                hero.children("tbody").children("tr").eq(1).children("td").eq(1)
+                .html('<div class="blue_mp status"><div></div>'
+                +"<span id='hero_MP'>"+result.hero['now_MP']+"</span>/"+result.hero['MP']+'</div>')
+                hero.children("tbody").children("tr").eq(2).children("td").eq(1).text(Math.round(Number(result.hero['att'])*100)/100);
+                hero.children("tbody").children("tr").eq(3).children("td").eq(1).text(Math.round(Number(result.hero['baoji'])*100)/100);
+                hero.children("tbody").children("tr").eq(4).children("td").eq(1).text(Math.round(Number(result.hero['xiaoguo'])*100)/100);
+                hero.children("tbody").children("tr").eq(5).children("td").eq(1).text(Math.round(Number(result.hero['shanghai'])*100)/100);
+                hero.next("figure").children("img").attr("src","/media/"+result.hero['img']);
+
+                $(".ready").css("display","none");
+                $(".fight").css("display","block");
+                $("#floor_info").children("p").html('你遇到了'+result.monster['name']+'<br>fight it!');
+                $(".detail_info").css("opacity", "1");
+                $("#floor").text(Number($("#floor").text())+1);
+                duTiao();
+            }
+        })
+    }else if($(this).text()=='返回大厅'){
+        $.ajax({
+            url:'/game/fight',
+            type:'post',
+            data:'action=gohost'+'&csrfmiddlewaretoken='+csrf,
+            success:function(){
+                location.replace("/game/host");
+            }
+        })
+    }else{
+        switch($(this).text()){
+            case '攻击': action='GJ';break;
+            case '技能': action='JN';break;
+            case '防御': action='FY';break;
+            case '逃跑': action='TP';break;
+        }
+        $.ajax({
+            url:'/game/fight',
+            type:'post',
+            data:'action='+action+'&csrfmiddlewaretoken='+csrf+"&floor="+$("#floor").text()
+            +"&mon_HP="+$("#mon_HP").text()+"&mon_MP="+$("#mon_MP").text(),
+            dataType:'json',
+            success:function(result){
+                clearTimeout(a);
+                $("#floor_info").children("p").html(result.introduce);
+                $("#hero_HP").text(result.hero['HP']);
+                $("#hero_MP").text(result.hero['MP']);
+                $("#mon_HP").text(result.monster['HP']);
+                $("#mon_MP").text(result.monster['MP']);
+                if(result.result=='defeated'){
+                    $("#hero_HP").text(0);
+                    $("#hero_MP").text(0);
+                    $(".ready").eq(1).css("display", "block");
+                    $(".fight").css("display", "none");
+                    $("#hero").children("h3").text("死亡的"+$("#hero").children("h3").text())
+                    setTimeout(function(){$("#floor_info").children("p").html("胜败乃兵家常事！<br>大侠请重新来过！");},5000);
+                }else if(result.result=='victory'){
+                    if (result.other){
+                        $("#hero").children("table").children("tbody").children("tr").eq(0).children("td").eq(1)
+                        .html('<div class="red_hp status"><div></div>'
+                        +"<span id='hero_HP'>"+result.hero['HP']+"</span>/"+result.hero['HP']+'</div>');
+                        $("#hero").children("table").children("tbody").children("tr").eq(1).children("td").eq(1)
+                        .html('<div class="blue_mp status"><div></div>'
+                        +"<span id='hero_MP'>"+result.hero['MP']+"</span>/"+result.hero['MP']+'</div>');
+                        $("#hero").children("table").children("tbody").children("tr").eq(2).children("td").eq(1)
+                        .text(result.other['att']);
+                        $("#hero").children("table").children("tbody").children("tr").eq(3).children("td").eq(1)
+                        .text(result.other['baoji']);
+                        $("#hero").children("table").children("tbody").children("tr").eq(4).children("td").eq(1)
+                        .text(result.other['shanghai']);
+                        $("#hero").children("table").children("tbody").children("tr").eq(5).children("td").eq(1)
+                        .text(result.other['xiaoguo']);
+                        
+                    }
+                    $("#mon_HP").text(0);
+                    $("#mon_MP").text(0);
+                    $(".ready").css("display", "block");
+                    $(".fight").css("display", "none");
+                    $("#monster").children("h3").text("死亡的"+$("#monster").children("h3").text())
+                    fuYuan();
+                }else if(result.result=='run'){
+                    $("#monster").css("opacity", "0");
+                    $(".ready").css("display", "block");
+                    $(".fight").css("display", "none");
+                    fuYuan();
+                }
+                duTiao();
+            }
+        })
+    }
+})
+</script>
+{% endif %}

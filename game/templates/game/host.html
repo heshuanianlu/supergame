@@ -1,0 +1,223 @@
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+*{
+    font-family: 'mofeng';
+}
+body{
+    padding: 30px;
+    background-image: url("/static/image/background.jpg");
+    background-size: cover;
+}
+#info{
+    background-color: rgba(127, 127, 127, 0.4);
+    float: left;
+    overflow: hidden;
+    padding: 10px;
+    width: 180px;
+    border-radius: 10px;
+    cursor: normal;
+}
+#info>div:nth-child(1){
+    position: relative;
+    float: left;
+    background-image: url("/media/{{ player.player.portrait }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    width: 60px;
+    height: 60px;
+}
+#info>div:nth-child(1)>p{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    border-top-left-radius: 100%;
+    line-height: 24px;
+    font-size: 16px;
+}
+#info>div:nth-child(1):hover>p{
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+#info>div:nth-child(2){
+    width: 100px;
+    height: 60px;
+    float: left;
+}
+#info>div:nth-child(2)>p{
+    font-size: 14px;
+    margin: 2px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+}
+#info>div:nth-child(2)>div{
+    margin: 3px 2px;
+}
+#info>div:nth-child(3){
+    clear: both;
+}
+#info>div:nth-child(3)>div{
+    margin: 0 2px;
+    height: 10px;
+    font-size: 8px;
+}
+#info>div>p.gold{
+    margin-top: 5px;
+}
+
+figure{
+    /* float: left; */
+    height: 600px;
+    overflow: hidden;
+    width: 40%;
+    margin: 40px auto;
+    position: relative;
+}
+figure>img{
+    width: 100%;
+    bottom: 0;
+}
+
+#button{
+    float: right;
+    overflow: hidden;
+    margin: 70px 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 200px;
+    height: 450px;
+}
+#button>button{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid black;
+    font-size: 24px;
+    background-color: transparent;
+    background-size: cover;
+}
+#button>button#fight{
+    background-image: url("/static/image/fight.jpg");
+}
+#button>button#info{
+    background-image: url("/static/image/info.jpg");
+}
+#button>button#store{
+    background-image: url("/static/image/store.jpg");
+}
+#button>button#exit{
+    background-image: url("/static/image/exit.jpg");
+}
+#button>button:hover{
+    border-color: white;
+}
+#button>button:active{
+    border-width: 10px;
+    font-size: 20px;
+}
+#button>button>p{
+    display: none;
+}
+#button>button:hover>p{
+    display: block;
+}
+
+.status{
+    height: 14px;
+    width: 100%;
+    border: 1px solid brown;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 7px;
+    position: relative;
+    background-color: transparent;
+}
+.status>div{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 7px;
+}
+#red_hp>div{
+    background-color: red;
+}
+#blue_mp>div{
+    background-color: blue;
+}
+#yellow_exp>div{
+    background-color: yellow;
+}
+</style>
+<div>
+
+<div id="info">
+    <div>
+        <p>{{ player.lv }}</p>
+    </div>    
+    <div>
+        <p>{{ player.name }}</p>
+        <div id="red_hp" class="status"><div></div>{{ player.now_HP }}/{{ HP }}</div>
+        <div id="blue_mp" class="status"><div></div>{{ player.now_MP }}/{{ MP }}</div>
+    </div>
+    <div>
+        <table>
+            <tr><td>攻击力：</td><td>{{ att }}</td></tr>
+            <tr><td>暴击概率：</td><td>{{ baoji }}</td></tr>
+            <tr><td>暴击伤害：</td><td>{{ shanghai }}</td></tr>
+            <tr><td>技能效果：</td><td>{{ xiaoguo }}</td></tr>
+        </table>
+        <div id="yellow_exp" class="status"><div></div>{{ player.exp }}/{{ exp }}</div>
+    </div>
+    <div><p class="gold">你的金币：<span>G</span> {{ player.gold }}</p></div>
+</div>
+
+<div id="button">
+    <button id="fight"><p>战斗</p></button>
+    <button id="info"><p>信息</p></button>
+    <button id="store"><p>商店</p></button>
+    <button id="exit"><p>注销</p></button>
+    {% csrf_token %}
+</div>
+
+<figure>
+    <img src="/media/{{ player.hero.action }}">
+</figure>
+
+</div>
+
+<script src="/static/tools/jquery.js"></script>
+<script>
+$("#button>button").click(function(){
+    if($(this).attr("id")=='exit'){
+        csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        $.ajax({
+            url:'/game/host',
+            type:'post',
+            data:'action=exit'+'&csrfmiddlewaretoken='+csrf,
+            success:function(){
+                // location.replace('/game/');
+                location.reload();
+            }
+        })
+    }else{
+       location.replace("/game/"+$(this).attr("id"));
+    }
+})
+$(".status").children("div").css("width", function(){
+    func=$(this).parent().text();
+    return eval(func)*100+'%';
+});
+</script>

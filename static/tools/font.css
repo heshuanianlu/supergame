@@ -1,0 +1,8 @@
+@font-face{
+    font-family: 'fankai';
+    src: url('/static/font/fankai.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'mofeng';
+    src: url('/static/font/mofeng.ttf') format('truetype');
+}

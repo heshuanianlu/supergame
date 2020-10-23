@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+*{
+    font-family: 'mofeng';
+}
+body>div:nth-child(1){
+    width: 1200px;
+    margin: 30px auto;
+    overflow: hidden;
+}
+body>div:nth-child(1)>a{
+    float: right;
+    margin: auto 20px;
+    color: black;
+    background-color: rgba(225, 225, 225, 0.5);
+    border: 1px solid black;
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+body>div:nth-child(1)>a:hover{
+    color: white;
+    background-color: rgba(225, 225, 225, 0.3);
+    border-color: white;
+}
+body>div:nth-child(1)>a:active{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: white;
+}
+body>div:nth-child(1)>p.gold{
+    display: inline-block;
+    margin: 0 40px;
+}
+
+body>div:nth-child(2){
+    margin: auto;
+    height: 600px;
+    width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+div#store,div#bag{
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    padding-bottom: 66px;
+}
+
+div#store>ul>li.equ_type{
+    border: 2px solid #777777;
+    margin: 2px;
+    width: 650px;
+    background-color: rgba(215, 206, 251, 0.7);
+    cursor: pointer;
+    border-radius: 10px;
+}
+div#store>ul>li.equ_type>p{
+    height: 30px;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+}
+div#store>ul>li.equ_type>ul{
+    height: 60px;
+    width: 640px;
+    display: none;
+    margin: auto;
+}
+
+div>#bag>ul{
+    width: 500px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+body>div>div>div{
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+body>div>div>div>button{
+    width: 100px;
+    height: 30px;
+    outline: none;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    border:1px solid black;
+}
+body>div>div>div>button:hover{
+    background-color: gold;
+}
+body>div>div>div>button:active{
+    border-width: 3px;
+}
+body>div>div>div>span{
+    color: red;
+}
+</style>
+
+
+<div>
+    <a href="/game/host">返回大厅</a>
+    <a href="/game/info">去物品栏</a>
+    <p class="gold">你的金币：<span>G</span> {{ player.gold }}</p>
+</div>
+<div>
+<div id="store">
+    <ul>
+        {% for all_name,equipments in store_equ.items %}
+        <li class="equ_type">
+            <p>{{ all_name }}</p>
+            <ul>
+                {% for equ in equipments %}
+                <li class="equ {{ equ.menu.0 }}" id="{{ equ.id }}">
+                    <img src="/media/{{ equ.cover }}">
+                    <div>
+                        <h3>{{ equ.name }}</h3>
+                        <p>{{ equ.menu }}</p>
+                        <table>
+                            <tr><td>生命值：</td><td>{{ equ.HP }}</td></tr>
+                            <tr><td>法力值：</td><td>{{ equ.MP }}</td></tr>
+                            <tr><td>攻击力：</td><td>{{ equ.att }}</td></tr>
+                            <tr><td>暴击概率：</td><td>{{ equ.baoji }}</td></tr>
+                            <tr><td>暴击伤害：</td><td>{{ equ.shanghai }}</td></tr>
+                            <tr><td>技能效果：</td><td>{{ equ.xiaoguo }}</td></tr>
+                        </table>
+                        <p class="gold"><span>G</span> {{ equ.gold }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    <div>
+        <span>请谨慎购物</span>
+        <button id="buy">购买</button>
+    </div>
+</div>
+{% csrf_token %}
+<div id="bag">
+    <ul>
+        {% for equ in bag_equ %}
+        <li class="equ {{ equ.menu.0 }}" id="{{ equ.id }}">
+            <img src="/media/{{ equ.cover }}">
+            <div>
+                <h3>{{ equ.name }}</h3>
+                <h4>部位：{{ equ.type }}</h4>
+                <p>{{ equ.menu }}</p>
+                <table>
+                    <tr><td>生命值：</td><td>{{ equ.HP }}</td></tr>
+                    <tr><td>法力值：</td><td>{{ equ.MP }}</td></tr>
+                    <tr><td>攻击力：</td><td>{{ equ.att }}</td></tr>
+                    <tr><td>暴击概率：</td><td>{{ equ.baoji }}</td></tr>
+                    <tr><td>暴击伤害：</td><td>{{ equ.shanghai }}</td></tr>
+                    <tr><td>技能效果：</td><td>{{ equ.xiaoguo }}</td></tr>
+                </table>
+                <p class="gold"><span>G</span> {{ equ.gold }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div>
+        <span>注意：出售物品时价格仅为购买的65%</span>
+        <button id='sale'>出售</button>
+    </div>
+</div>
+</div>
+
+
+<script src="/static/tools/jquery.js"></script>
+
+<script>
+while($("#bag>ul>li").length<50){
+    $("#bag>ul").html($("#bag>ul").html()+'<li class="null"></li>');
+}
+$(".equ_type>p").click(function(){
+    for(var i=0;i<$(".equ_type").length;i++){
+        if($(this).parent('li').index()==i){
+            if($(".equ_type>p").eq(i).next("ul").css("display")=="block"){
+                $(".equ_type>p").eq(i).next("ul").css("display","none");
+            }else if($(".equ_type>p").eq(i).next("ul").css("display")=="none"){
+                $(".equ_type>p").eq(i).next("ul").css("display","block");
+            }
+        }else{
+            $(".equ_type>p").eq(i).next("ul").css("display","none");
+        }
+    }
+})
+$(".equ").click(function(){
+    for(var i=0;i<$(".equ").length;i++){
+        if($(this).is($('.equ').eq(i))){
+            $('.equ').eq(i).css("background-color", "#555").addClass('selected');
+        }else{
+            $('.equ').eq(i).css("background-color", "#ccc").removeClass('selected');
+        }
+    }
+})
+$('button').click(function(){
+    it=$(".selected");
+    function post_equ(action){
+        var csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        $.ajax({
+            type:'post',
+            url:'/game/store',
+            data:'action='+action+'&equ_id='+it.attr('id')+"&csrfmiddlewaretoken="+csrf,
+            dataType:'json',
+            success:function(result){
+                alert(result.tip);
+                location.reload();
+            }
+        })
+    }
+    if(($(this).attr('id')=='buy')&&(it.parents('body>div>div').is($(this).parents('body>div>div')))){
+        post_equ('buy');
+    }else if(($(this).attr('id')=='sale')&&(it.parents('body>div>div').is($(this).parents('body>div>div')))){
+        post_equ('sale');
+    }
+})
+</script>

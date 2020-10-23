@@ -1,0 +1,283 @@
+<link rel="shortcut icon" href="/static/title/hanpi.jpg">
+<title>准备享受游戏吧</title>
+<link rel="stylesheet" href="/static/tools/style.css">
+<link rel="stylesheet" href="/static/tools/font.css">
+<style>
+*{
+    font-family: 'mofeng';
+}
+body{
+    background-image: url("/static/image/background.jpg");
+    background-size: cover;
+}
+body>div{
+    width: 600px;
+    margin: 6% auto;
+    border: 3px solid rgba(0, 0, 0, 0.199);
+    background-color: rgba(204, 204, 204, 0.796);
+    border-radius: 3px;
+}
+div>h1{
+    text-align: center;
+    margin: 36px auto 20px;
+    font-size: 30px;
+}
+div>form{
+    border: 3px solid rgba(204, 204, 204, 0.204);
+    width: 85%;
+    margin: 30px auto 60px;
+    background-color: rgba(0, 0, 0, 0.36);
+    border-radius: 3px;
+    padding: 30px 0;
+}
+form>label{
+    width: 150px;
+    height: 36px;
+    border: 1px solid transparent;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: right;
+}
+form>input{
+    width: 300px;
+    height: 36px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    padding: 0 5px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+form>p{
+    margin: -6px 160px;
+    width: 300px;
+    height: 16px;
+    font-size: 14px;
+    transition: none;
+}
+form>input:hover{
+    background-color: #888;
+    border: 1px solid white;
+}
+form>input:active{
+    outline: 1px solid gold;
+}
+form>input#submit{
+    width: 120px;
+}
+div>p{
+    text-align: center;
+    margin: 40px auto;
+    font-size: 32px;
+    font-weight: bolder;
+}
+p>em{
+    margin: 0 5px;
+    color: red;
+}
+form>input#portrait{
+    width: 180px;
+    font-size: 18px;
+    border: none;
+    padding: 0;
+}
+form>input#portrait:hover{
+    background: none;
+}
+form>img{
+    width: 90px;
+    height: 90px;
+    margin-right: 60px;
+    float: right;
+}
+</style>
+
+{% load static %}
+<script src="/static/tools/jquery.js"></script>
+
+{% if action == 'register' %}
+    <div>
+        <h1>注册</h1>
+        <form action="/user/register" method="POST">
+            <label for="username">设置用户名</label>
+            <input type="text" name="username" id="username">
+            <p></p>
+            <br>
+            <label for="password">设置密码</label>
+            <input type="password" name="password" id="password">
+            <p></p>
+            <br>
+            <label for="again">重复密码</label>
+            <input type="password" name="again" id="again">
+            <p></p>
+            <br>
+            <label></label>
+            <input type="submit" value="注册" id="submit">
+            <p>{{ tip }}</p>
+            {% csrf_token %}
+        </form>
+    </div>
+    <script>
+        function check_submit(){
+            $("#submit").removeAttr("disabled");
+            if($("#username").val().length<=6){
+                $("#submit").attr("disabled",1)
+                $("#username").next("p").text("用户名过短").css("color","red")
+            }else if($("#username").val().length>14){
+                $("#submit").attr("disabled",1)
+                $("#username").next("p").text("用户名过长").css("color","red")
+            }else{
+                $("#username").next("p").text("用户名合规").css("color","green")
+            }
+            if($("#password").val().length<8){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码过短").css("color","red")
+            }else if($("#password").val().length>32){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码过长").css("color","red")
+            }else if($("#password").val()==$("#username").val()){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码不能与用户名相同").css("color","red")
+            }else{
+                $("#password").next("p").text("密码可用").css("color","green")
+            }
+            if($("#again").val()!=$("#password").val()){
+                $("#submit").attr("disabled",1)
+                $("#again").next("p").text("两次密码不一致").css("color","red")
+            }else{
+                $("#again").next("p").text("密码一致").css("color","green")
+            }
+        }
+        $("input").on("input propertychange change", function(event){check_submit()});check_submit();
+    </script>
+{% elif action == 'log' %}
+    <div>
+        <h1>登录</h1>
+        <form action="/user/log" method="POST">
+            <label for="username">账号用户名</label>
+            <input type="text" name="username" id="username">
+            <p></p>
+            <br>
+            <label for="password">账号密码</label>
+            <input type="password" name="password" id="password">
+            <p></p>
+            <br>
+            <label></label>
+            <input type="submit" value="登录" id="submit">
+            <p>{{ tip }}</p>
+            {% csrf_token %}
+        </form>
+    </div>
+    <script>
+        $("input").on("input propertychange change", function(){
+            $("#submit").removeAttr("disabled")
+            if($("#username").val().length==0){
+                $("#submit").attr("disabled",1)
+                $("#username").next("p").text("请输入用户名").css("color","red")
+            }else{
+                $("#username").next("p").text("")
+            }
+            if($("#password").val().length==0){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("请输入密码").css("color","red")
+            }else{
+                $("#password").next("p").text("")
+            }
+        })
+        if($("#username").val()==0|$("#password").val()==0){
+            $("#submit").attr("disabled",1)
+        }
+    </script>
+{% elif action == 'edit' %}
+    <div>
+        <h1>个人信息</h1>
+        <form action="/user/edit" method="POST" enctype="multipart/form-data">
+            <label for="username">修改用户名</label>
+            <input type="text" name="username" id="username" value="{{ user.username }}">
+            <p></p>
+            <br>
+            <label for="password">修改密码</label>
+            <input type="password" name="password" id="password">
+            <p></p>
+            <br>
+            <label for="again">重复密码</label>
+            <input type="password" name="again" id="again">
+            <p></p>
+            <br>
+            <img id="showimg" src="/media/{{ user.portrait }}">
+            <label for="portrait">修改头像</label>
+            <input type="file" name="portrait" id="portrait" 
+            onchange="showImg(this)" accept="image/jpg,image/png,image/gif,image/jfif,image/jpeg">
+            <br>
+            <label></label>
+            <input type="submit" value="提交" id="submit" disabled>
+            <p>{{ tip }}</p>
+            {% csrf_token %}
+        </form>
+    </div>
+    <script>
+        function showImg(thisimg) {
+            var file = thisimg.files[0];
+            if(window.FileReader) {
+                var fr = new FileReader();
+                var showimg = document.getElementById('showimg');
+                fr.onloadend = function(e) {
+                    showimg.src = e.target.result;
+                };
+                fr.readAsDataURL(file);
+            }
+        }
+        $("input").on("input propertychange change", function(){
+            if($("#username").val()||$("#password").val()||$("#portrait").val()){$("#submit").removeAttr("disabled")}
+            else{$("#submit").attr("disabled",1)}
+        })
+        $("#username").on("input propertychange change",function(){
+            if($("#username").val().length==0||$("#username").val()=="{{ user.username }}"){
+                $("#username").next("p").text("用户名不变").css("color","green")
+                $("#submit").removeAttr("disabled")
+            }else if($("#username").val().length<=6){
+                $("#submit").attr("disabled",1)
+                $("#username").next("p").text("用户名过短").css("color","red")
+            }else if($("#username").val().length>14){
+                $("#submit").attr("disabled",1)
+                $("#username").next("p").text("用户名过长").css("color","red")
+            }else{
+                $("#username").next("p").text("用户名合规").css("color","green")
+                $("#submit").removeAttr("disabled")
+            }
+        })
+        function check_password(){
+            $("#submit").removeAttr("disabled");
+            if($("#password").val().length==0){
+                $("#password").next("p").text("密码不变").css("color","green")
+            }else if($("#password").val().length<8){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码过短").css("color","red")
+            }else if($("#password").val().length>32){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码过长").css("color","red")
+            }else if($("#password").val()==$("{{ user.username }}"||$("#password").val()==$("#username").val())){
+                $("#submit").attr("disabled",1)
+                $("#password").next("p").text("密码不能与用户名相同").css("color","red")
+            }else{
+                $("#password").next("p").text("密码可用").css("color","green")
+            }
+            if($("#again").val()!=$("#password").val()&&$("#again").val().length!=0){
+                $("#submit").attr("disabled",1)
+                $("#again").next("p").text("两次密码不一致").css("color","red")
+            }else{
+                $("#again").next("p").text("密码一致").css("color","green")
+            }
+        }
+        $("#password").on("input propertychange change",check_password());
+        $("#again").on("input propertychange change",check_password());
+    </script>
+{% else %}
+    {% if status == 'logged' %}
+        <script>window.open("","_self").close()</script>
+    {% else %}
+    <div>
+        <p>似乎出现了一些小问题，<br>比如<em>404！你的链接有错误</em></p>
+    </div>
+    {% endif %}
+{% endif %}

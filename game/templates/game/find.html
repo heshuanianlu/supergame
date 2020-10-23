@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/title/hanpi.jpg">
+    <link rel="stylesheet" href="/static/tools/font.css">
+    <script src="/static/tools/jquery.js"></script>
+    <script src="/static/tools/vue.js"></script>
+    <title>查找用户</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'fankai';
+        }
+        body>video{
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            bottom: 0;
+            right: 0;
+            z-index: -9999;
+            position: fixed;
+            /* -webkit-filter: grayscale(50%); */
+        }
+        div#find{
+            position: fixed;
+            top: 120px;
+            left: 20%;
+            height: 30px;
+            width: 60%;
+            border: 3px solid #ccc;
+            border-radius: 15px;
+            box-sizing: content-box;
+            overflow: hidden;
+            z-index: 9999;
+            /* transition: all 0.3s; */
+        }
+        div#find:hover{
+            border-color: white;
+        }
+        div#find>input{
+            border: none;
+            outline: none;
+            height: 100%;
+            width: 100%;
+            border-radius: 18px;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding-left: 10px;
+        }
+        div#find>input:hover{
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        div#find>p{
+            width: 30px;
+            height: 100%;
+            font-size: 24px;
+            font-weight: bolder;
+            border: 2px solid transparent;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: white;
+            cursor: pointer;
+        }
+        div#find>p:hover{
+            background-color: white;
+            color: black;
+            border-color: white;
+        }
+        div#find>p:active{
+            background-color: black;
+            color: white;
+        }
+        div#tip{
+            text-align: center;
+            font-size: 40px;
+            margin: 30px;
+        }
+        div#hide{
+            box-sizing: content-box;
+            position: fixed;
+            top: 0;
+            left: 20%;
+            height: 156px;
+            width: 60%;
+            background-color: rgba(255, 255, 255, 0.4);
+            background-image: url("/static/image/game.jpg");
+            background-size: cover;
+            overflow: hidden;
+            z-index: 1;
+            border-left: 3px solid #ccc;
+            border-right: 3px solid #ccc;
+        }
+        div#cont{
+            box-sizing: content-box;
+            position: absolute;
+            width: 60%;
+            border: 3px solid #ccc;
+            left: 20%;
+            top: 138px;
+            padding: 30px 0;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        div#cont div.user{
+            width: 90%;
+            margin: 50px auto;
+            border: 3px solid #666;
+            border-radius: 50px;
+        }
+        div#cont div.list{
+            width: 90%;
+            margin: 30px auto;
+            padding: 3% 5%;
+            border: 3px solid transparent;
+            border-left-color: black;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        div#cont div.list:hover{
+            border-color: #ccc;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        div#cont div.list>figure{
+            float: left;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        div#cont div.list>figure>img{
+            height: 100%;
+            width: 100%;
+        }
+        div#cont div.list>div{
+            float: left;
+        }
+        div#cont div.list>div>p{
+            margin: 10px 0;
+        }
+        div#pace{
+            box-sizing: content-box;
+            position: absolute;
+            width: 60%;
+            bottom: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted>
+        <source src="/static/image/game.mp4" type="video/mp4">
+    </video>
+
+    <div id="find"><input type="text" placeholder="请输入玩家ID或者昵称"><p>→</p></div>
+    {% csrf_token %}
+    <div>
+        <div id="hide"></div>
+        <div id="cont">
+            {% if user_id %}
+            <div class="user">
+                <div class="list">
+                    <figure><img src="/media/{{ user.portrait }}"></figure>
+                    <div>
+                        <p>用户id：{{ user.id }}</p>
+                        <p>用户名：{{ user.username }}</p>
+                    </div>
+                </div>
+                {% for player in players %}
+                <div class="list">
+                    <figure><img src="/media/{{ player.hero.cover }}"></figure>
+                    <div>
+                        <h3>昵称：{{ player.name }}</h3>
+                        <p>{{ player.hero.sex }}{{ player.hero.pos }}</p>
+                        <p>等级：{{ player.lv }}</p>
+                        <p>金币：{{ player.gold }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div id="tip">
+                <h3>{{ tip }}</h3>
+            </div>
+            {% endif %}
+        </div>
+        <div id="pace"></div>
+    </div>
+
+
+    <script>
+        // 网页与资源加载事件
+        function loadAll(){
+            var hw=$("body").width()*0.08;
+            $("div.list>figure").css("height", hw+"px").css("width",hw+"px");
+            $("div.list>div").css("margin-left",0.3*hw+"px")
+            $("div.list>div>h3").css("font-size",0.2*hw+"px");
+            $("div.list>div>p").css("font-size",0.14*hw+"px");
+            $("#pace").css("top",$("#cont").height()).css("height",2*hw+"px");
+        }
+        loadAll();
+        $("#find>p").click(function(){
+            var csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+            if($("#find>input").val()){
+                $.ajax({
+                    url:'/user/see',
+                    data:'csrfmiddlewaretoken='+csrf+"&data="+$("#find>input").val(),
+                    type:'post',
+                    dataType:'json',
+                    success:function(response){
+                        $("#find>input").val("");
+                        var result=response.result;
+                        html=""
+                        for(var i=0;i<result.length;i++){
+                            var user=result[i];
+                            html+="<div class='user'><div class='list'>"+
+                                "<figure><img src='/media/"+user['portrait']+"'></figure>"+
+                                "<div><p>用户id："+user['id']+"</p><p>用户名："+user['username']+"</p></div></div>";
+                            for(var j=0;j<user['heroes'].length;j++){
+                                var hero=user['heroes'][j];
+                                html+="<div class='list'>"+
+                                    "<figure><img src='/media/"+hero['cover']+"'></figure>"+
+                                    "<div><h3>昵称："+hero['name']+"</h3>"+
+                                    "<p>"+hero['hero']+"</p>"+
+                                    "<p>等级："+hero['lv']+"</p>"+
+                                    "<p>金币："+hero['gold']+"</p></div></div>"
+                            }
+                            html+="</div>"
+                        }
+                        $("#cont").html(html);
+                        loadAll();
+                    }
+                })
+            }
+        })
+        document.onkeydown = function (e) { // 回车提交表单
+        // 兼容FF和IE和Opera
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+            if (code == 13) {$("#find>p").click()}
+        }
+
+        // 滚动条事件
+        $(document).scroll(function() {
+            var scroH = $(document).scrollTop(); //滚动高度
+            var viewH = $(window).height(); //可见高度
+            var contentH = $(document).height(); //内容高度
+            var div_width=70, // %
+                div_height=20,  // px
+                div_border_width=1,  // px
+                div_border_radius=0,  // px
+                input_border_radius=0,  // px
+                p_width=20,  // px
+                font_size=16,  // px
+                old_top=120;  //px
+            if(scroH <= old_top){
+                $("#find")
+                    .css("width",(60+(div_width-60)*scroH/old_top)+"%")
+                    .css("height",(30-(30-div_height)*scroH/old_top)+"px")
+                    .css("border-width",(3-(3-div_border_width)*scroH/old_top)+"px")
+                    .css("border-radius",18+"px")
+                    .css("top",(old_top-scroH)+"px")
+                    .css("left",(100-(60+(div_width-60)*scroH/old_top))/2+"%");
+                $("#find>input")
+                    .css("font-size",24-(24-font_size)*scroH/old_top+"px")
+                    .css("border-radius",15+"px");
+                $("#find>p")
+                    .css("width",(30-(30-p_width)*scroH/old_top)+"px")
+                    .css("font-size",24-(24-font_size)*scroH/old_top+"px");
+                $("#cont")
+                    .css("width",(60+(div_width-60)*scroH/old_top)+"%")
+                    .css("border-width",(3-(3-div_border_width)*scroH/old_top)+"px")
+                    .css("left",(100-(60+(div_width-60)*scroH/old_top))/2+"%")
+                    .css("top",(old_top-scroH)+(3-(3-div_border_width)*scroH/old_top)+(30-(30-div_height)*scroH/old_top)/2+"px");
+                    // .css("top",(old_top-scroH)+(3-(3-div_border_width)*scroH/50)+(30-(30-div_height)*scroH/50)/2+scroH+"px");
+                $("#hide")
+                    .css("width",(60+(div_width-60)*scroH/old_top)+"%")
+                    .css("border-width",(3-(3-div_border_width)*scroH/old_top)+"px")
+                    .css("height",(old_top-scroH)+(30-(30-div_height)*scroH/old_top)+(3-(3-div_border_width)*scroH/old_top)*2+"px")
+                    .css("left",(100-(60+(div_width-60)*scroH/old_top))/2+"%");
+            }
+            if(scroH > old_top){ //距离顶部大于50px时
+                $("#find")
+                    .css("width",div_width+"%")
+                    .css("height",div_height+"px")
+                    .css("border-width",div_border_width+"px")
+                    .css("border-radius",div_border_radius+"px")
+                    .css("top",0)
+                    .css("left",(100-(60+(div_width-60)))/2+"%");
+                $("#find>input")
+                    .css("font-size",font_size+"px")
+                    .css("border-radius",input_border_radius+"px");
+                $("#find>p")
+                    .css("width",p_width+"px")
+                    .css("font-size",font_size+"px");
+                $("#cont")
+                    .css("width",div_width+"%")
+                    .css("border-width",div_border_width+"px")
+                    .css("left",(100-(60+(div_width-60)))/2+"%")
+                    .css("top",0);
+                $("#hide")
+                    .css("width",div_width+"%")
+                    .css("border-width",div_border_width+"px")
+                    .css("height",div_height+"px")
+                    .css("left",(100-(60+(div_width-60)))/2+"%");
+            }
+            if (contentH - (scroH + viewH) <= 100){ } //距离底部高度小于100px
+            if (contentH = (scroH + viewH)){ } //滚动条滑到底部啦
+        });
+    </script>
+</body>
+</html>

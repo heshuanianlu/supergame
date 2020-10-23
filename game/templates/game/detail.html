@@ -1,0 +1,308 @@
+<link rel="shortcut icon" href="/static/title/hanpi.jpg">
+<title>{{ resource_type }}详情</title>
+<link rel="stylesheet" href="/static/tools/font.css">
+<script src="/static/tools/jquery.js"></script>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'jiankai', 'mofeng', 'fankai';
+}
+body>div{
+    margin: 60px auto;
+    width: 1200px;
+    border: 3px solid burlywood;
+    border-radius: 50px;
+    box-sizing: content-box;
+    padding: 25px;
+    /* color: white; */
+    background-color: rgba(255, 255, 255, 0.4);
+}
+body>video{
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    bottom: 0;
+    right: 0;
+    z-index: -9999;
+    position: fixed;
+    /* -webkit-filter: grayscale(50%); */
+}
+div>div{
+    position: relative;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+div>h1{
+    text-align: center;
+    margin: 30px auto;
+    font-size: 30px;
+}
+div>p{
+    position: absolute;
+    top: 10px;
+    font-size: 18px;
+}
+div>p:nth-child(1){
+    left: 10px;
+}
+div>p:nth-child(3){
+    right: 10px;
+}
+div>ul{
+    list-style: none;
+    overflow: hidden;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: left;
+    align-items: center;
+}
+ul>li{
+    width: 150px;
+    text-align: center;
+    height: 120px;
+    padding: 10px;
+    border: 1px dashed transparent;
+    font-size: 20px;
+    border-radius: 30px;
+}
+ul>li:hover{
+    border: 3px dashed black;
+    padding: 7px;
+    cursor: pointer;
+}
+li>p{
+    height: 20px;
+}
+li>img{
+    height: 80px;
+    width: 80px;
+    display: block;
+    margin: auto;
+}
+div>table{
+    overflow: hidden;
+    /* border-collapse: collapse; */
+    width: 100%;
+}
+tr>th{
+    width: 25%;
+}
+tr>td{
+    width: 70%;
+}
+th,td{
+    border: 1px solid black;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 24px;
+    height: 45px;
+    line-height: 45px;
+}
+tr:hover>td,tr:hover>th{
+    background-color: rgba(255, 255, 255, 0.6);
+}
+tr#delete>td,tr#delete>th{
+    color: red;
+}
+td>a{
+    cursor: pointer;
+}
+td>img{
+    height: 80px;
+    width: 80px;
+    display: block;
+    margin: auto;
+}
+td>input,td>select{
+    width: 60%;
+    height: 80%;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 5px;
+}
+td>input.checkbox{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+}
+</style>
+
+<video autoplay loop muted>
+    <source  src="/static/image/game.mp4" type="video/mp4">
+</video>
+
+{% if content %}
+
+<div>
+    <div>
+        <p><a href="/detail/">返回目录</a></p>
+        <h1><a href="/detail/{{ content }}">{{ resource_type }}</a></h1>
+        {% if admin %}
+        <p><a href="/append/{{ content }}">增加{{ resource_type }}</a></p>
+        {% endif %}
+    </div>
+
+    <ul>
+        {% for resource in resource_list %}
+            <li id="{{ resource.id }}">
+                <p>{{ resource.name }}{{ resource.sex }}{{ resource.pos }}</p>
+                <img src="/media/{{ resource.cover }}" alt="">
+            </li>
+        {% endfor %}
+    </ul>
+
+    <table>
+        {% for attr in resource %}
+            <tr id="{{ attr.0 }}">
+                <th>{{ attr.1 }}</th>
+                <td>{{ attr.2 }}</td>
+                {% if admin %}
+                <td><a>修改</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        {% if admin and resource %}
+            <tr id="delete">
+                <th>谨慎删除</th>
+                <td>看不爽他？觉得太不平衡？</td>
+                <td><a href="/delete/{{ content }}/{{ res_id }}">删除</a></td>
+            </tr>
+        {% endif %}
+        {% csrf_token %}
+    </table>
+</div>
+
+<script>
+    csrf=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    $("ul>li").click(function(){
+        i = $(this).children('p').text()
+        if (location.href[location.href.length-1]=='/'){
+            location.href=location.href+$(this).attr('id');
+        }else{
+            location.href=location.href+'/'+$(this).attr('id');
+        }
+    })
+    $("#cover").children("td").eq(0).html($("#cover").children("td").eq(0).text());
+    $("#action").children("td").eq(0).html($("#action").children("td").eq(0).text());
+    $("td>a").click(function(){
+        tr=$(this).parents("tr");
+        var td={
+            'name':'text','menu':'text',"type":"text",'pos':'text','id':'text',
+            'cover':'file','action':'file',
+            'HP':'int','MP':'int','att':'int',"gold":"int","exp":"int",
+            'baoji':'float','shanghai':'float',"xiaoguo":"float","gailv":"float","run":"float",
+            "floor1":"choose","floor2":"choose","floor3":"choose","floor4":"choose","floor5":"choose",
+        }[tr.attr("id")]
+        if ($(this).text()=="修改"){
+            switch (td){
+                case "text":var html="<input type='text' value='"+tr.children("td").eq(0).text()+"'>"; break;
+                case "file":var html="<input type='file' accept='image/jpg,image/png,image/gif,image/jpeg,image/jfif'>"; break;
+                case "int":var html="<input type='number' step=1 value='"+tr.children("td").eq(0).text()+"'>"; break;
+                case "float":var html="<input type='number' step=0.01 value='"+tr.children("td").eq(0).text()+"'>"; break;
+                case "choose": var html="";
+                    $.ajax({
+                        url:'/delete/monster',
+                        type:'post',
+                        data:"csrfmiddlewaretoken="+csrf,
+                        async:false,
+                        dataType:'json',
+                        success:function(result){
+                            var resource=result.resource;
+                            var mon_list=tr.children("td").eq(0).text().split('、');
+                            for (key in resource){
+                                html+="<input type='checkbox' value='"+key+"' id='monster"+key+"' ";
+                                if (mon_list.includes(resource[key])){
+                                    html+="checked ";
+                                }
+                                html+="class='checkbox'><label for='monster"+key+"'>"+resource[key]+"</label>";
+                            }
+                        }
+                    });break;
+            }
+            tr.children("td").eq(0).html(html);
+            tr.children("td").eq(1).children("a").eq(0).text("提交");
+        }else if($(this).text()=="提交"){
+            var data="csrfmiddlewaretoken="+csrf;
+            $.ajaxSetup({
+                url:"/detail/{{ content }}/{{ res_id }}/"+tr.attr("id"),
+                type:"post",
+                dataType:"json",
+                async:false,
+                csrfmiddlewaretoken:csrf,
+                success:function(e){
+                    alert(e.tip);
+                    tr.children("td").eq(0).html(e.result);
+                    tr.children("td").eq(1).children("a").eq(0).text("修改");
+                },
+                error:function(e){
+                    alert(e.fail());
+                }
+            })
+            switch (td){
+                case "text": case "int": case "float":
+                    data+="&value="+tr.children("td").eq(0).children("input").val();
+                    $.ajax({data:data});
+                    break;
+                case "file":
+                    var formData = new FormData();
+                    formData.append('value', tr.children("td").eq(0).children("input")[0].files[0]);
+                    formData.append('csrfmiddlewaretoken',"{{ csrf_token }}");
+                    $.ajax({
+                        data:formData,
+                        contentType:false,//enctype="multipart/form-data"
+                        processData:false
+                    });
+                    break;
+                case "choose":
+                    var value=[];
+                    $('td>input:checkbox:checked').each(function(){value.push($(this).val())});
+                    data+="&value="+value.join('+');
+                    console.log(data);
+                    $.ajax({data:data});
+                    break;
+            }
+        }
+    })
+</script>
+
+{% else %}
+
+<div>
+    <h1>图鉴</h1>
+    <ul>
+        <li>
+            <a href="/detail/hero" target="new">英雄图鉴</a>
+            <img src="/static/image/game.jpg" alt="英雄">
+        </li>
+        <li>
+            <a href="/detail/equipment" target="new">装备图鉴</a>
+            <img src="/static/image/game.jpg" alt="装备">
+        </li>
+        <li>
+            <a href="/detail/consumable" target="new">消耗品图鉴</a>
+            <img src="/static/image/game.jpg" alt="消耗品">
+        </li>
+        <li>
+            <a href="/detail/map" target="new">地图图鉴</a>
+            <img src="/static/image/game.jpg" alt="地图">
+        </li>
+        <li>
+            <a href="/detail/monster" target="new">怪物图鉴</a>
+            <img src="/static/image/game.jpg" alt="怪物">
+        </li>
+    </ul>
+</div>
+
+<script>
+    $("li").click(function(){
+        location.href=$(this).children("a").attr('href');
+    })
+</script>
+
+{% endif %}

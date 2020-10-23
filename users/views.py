@@ -1,0 +1,209 @@
+import datetime
+import time
+
+from django.db.utils import IntegrityError
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+
+import jwt
+import hashlib
+
+from users.models import User, Player
+
+
+# Create your views here.
+def register(request, action):
+    if check_token(request):
+        return render(request, 'game/user.html', {"status": "logged"})
+    if request.method == 'GET':
+        return render(request, 'game/user.html', locals())
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        again = request.POST.get('again')
+
+        if not (username and password and again):
+            tip = "未输入完成"
+        elif password != again:
+            tip = "两次密码输入不一致"
+        else:
+            m = hashlib.md5(b'game_user')
+            m.update(password.encode())
+            password = m.hexdigest()
+            try:
+                user = User.objects.create(username=username, password=password)
+            except IntegrityError:
+                tip = "用户已存在"
+            except Exception as e:
+                print("register error", e)
+                tip = "未知错误"
+            else:
+                tip = "注册成功"
+                return create_token(request, user)
+        return render(request, 'game/user.html', locals())
+
+
+def log(request, action):
+    if request.method == 'GET':
+        user_id = check_token(request)
+        response = render(request, 'game/user.html', locals())
+        if user_id:
+            response.delete_cookie('Game_JWT_token')
+        return response
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not (username and password):
+            tip = "请完整输入用户名或密码"
+        else:
+            m = hashlib.md5(b'game_user')
+            m.update(password.encode())
+            password = m.hexdigest()
+            try:
+                user = User.objects.get(username=username, password=password)
+            except User.DoesNotExist:
+                tip = "用户名和密码不匹配"
+            except Exception as e:
+                print('login error', e)
+                tip = "未知错误"
+            else:
+                return create_token(request, user)
+        return render(request, 'game/user.html', locals())
+
+
+def edit(request, action):
+    user_id = check_token(request)
+    if not user_id:
+        return redirect('/user/log')
+    user = User.objects.get(id=user_id)
+    if request.method == 'GET':
+        return render(request, 'game/user.html', locals())
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        portrait = request.FILES.get('portrait')
+        tip = ''
+        if username:
+            try:
+                user.username = username
+            except Exception as e:
+                print(e)
+                tip += '用户名已存在！'
+        if password:
+            m = hashlib.md5(b'game_user')
+            m.update(password.encode())
+            password = m.hexdigest()
+            user.password = password
+            tip += '密码修改成功！'
+        if portrait:
+            user.portrait = portrait
+            tip += '头像修改成功！'
+        user.save()
+        return render(request, 'game/user.html', locals())
+
+
+def see(request):
+    if request.method == 'POST':
+        data = request.POST.get('data')
+        all_user = User.objects.all()
+        all_player = Player.objects.all()
+        users = {i for i in all_user.filter(id=int(data))} if data.isdigit() else set()
+        for j in set(data):
+            users = users | set(all_user.filter(username__contains=j))
+            users = users | {i.player for i in all_player.filter(name__contains=j)}
+        result = {'result': []}
+        for user in users:
+            hero = []
+            for player in user.player_set.all():
+                hero.append({
+                    'name': player.name,
+                    'hero': player.hero.sex + player.hero.pos,
+                    'gold': player.gold,
+                    'lv': player.lv,
+                    'cover': player.hero.cover.name,
+                })
+            result['result'].append({
+                'id': user.id,
+                'username': user.username,
+                'portrait': user.portrait.name,
+                'heroes': hero,
+            })
+        return JsonResponse(result)
+    else:
+        # if request.method == 'GET':
+        user_id = check_token(request)
+        if user_id:
+            try:
+                user = User.objects.get(id=user_id)
+                players = Player.objects.filter(player=user)
+            except User.DoesNotExist or Player.DoesNotExist:
+                tip = '登录信息有误！'
+            except Exception as e:
+                print('When see users', e)
+                tip = '登录信息有误！'
+        else:
+            tip = '输入查看信息！'
+        return render(request, 'game/find.html', locals())
+
+
+def create_token(request, user: User.objects):
+    headers = {'typ': 'jwt', 'alg': 'HS256'}
+    payload = {
+        'user_id': user.id,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=7),
+    }
+    result = jwt.encode(payload=payload, key='user',
+                        algorithm='HS256', headers=headers).decode('utf8')
+    response = render(request, 'game/user.html', {'status': 'logged'})
+    response.set_cookie('Game_JWT_token', result)
+    if 'hero_id' in request.session.keys():
+        del request.session['hero_id']
+    return response
+
+
+def check_token(request):
+    token = request.COOKIES.get('Game_JWT_token')
+    if token:
+        try:
+            payload = jwt.decode(token, key='user', algorithm='HS256')
+        except jwt.ExpiredSignatureError:
+            return
+        if payload:
+            user_id = payload['user_id']
+            return user_id
+
+
+def admin(request):
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        pin = request.POST.get('pin')
+        if pin:
+            p = hashlib.sha512(b'han_han')
+            p.update(pin.encode())
+            pin = p.hexdigest()
+            if pin == 'c64ecea1d07b3c27e262e107b4c7' \
+                      '9b062f266c5d82f9832f8617edaa' \
+                      '77a73cc349266f5d248495c9d935' \
+                      '50093abd2b1bb0414eb791e14856' \
+                      '55acdd31f48ec8a9':  # 559737
+                response = render(request, 'game/admin.html', {'admin': 1})
+                p.update(str(time.time()).encode())
+                response.set_cookie('Super_Game_Admin', p.digest(), 36000)
+                return response
+            else:
+                tip = '验证码输入错误'
+        else:
+            action = request.POST.get('action')
+            if action == 'phone':
+                tip = '验证码已发送，请耐心等待'
+                print(request.POST.get('phone'))
+            else:
+                tip = '请认真填写手机'
+                print('admin action error', action)
+    else:
+        tip = '请求出错！'
+        print('admin request error', request.method)
+    response = render(request, 'game/admin.html', locals())
+    return response
