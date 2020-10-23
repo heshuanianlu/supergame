@@ -93,7 +93,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'game',
             'USER': 'root',
-            'PASSWORD': '123',  # 'game',
+            'PASSWORD': '12345678',
             'HOST': '127.0.0.1',
             'PORT': '3306',
             'OPTIONS': {
