@@ -13,10 +13,10 @@ class Server(object):
         self.ready = []
         # self.ready = {}
 
-    def get_message(self, message: str, self_id, websocket):
+    def get_message(self, message: str, self_id):
         message = message.split('=')
         if message[0] == 'connect':  # connect=my_id
-            message, client_list = self.connect(self_id, websocket)
+            message, client_list = self.connect(self_id)
         elif message[0] == 'choose':  # choose=0
             user_id = int(message[1])
             message, client_list = self.choose(self_id, user_id)
@@ -35,19 +35,15 @@ class Server(object):
             message, client_list = '无效消息', [self.client[self_id]]
         return message, client_list
 
-    def connect(self, self_id, websocket):
+    def connect(self, self_id):
         """检查用户当前状态，为重连返回战局，否则则返回大厅"""
         if self_id not in self.client.keys():
-            pass
-        self.client[self_id] = websocket
-        message = {'user_id': [], 'user_portrait': [], 'user_name': [], 'message': 'hall'}
-        for user_id in self.hall:
-            if user_id != self_id:
-                user = User.objects.get(id=user_id)
-                message['user_id'].append(user.id)
-                message['user_cover'].append(user.portrait.name)
-                message['user_name'].append(user.name)
-        return message, self.hall
+            message = self.change(self_id)
+            client = self.hall
+        else:
+            message = {'command': 'error', 'error': '用户已登录'}
+            client = self.client[self_id]
+        return message, client
 
     def choose(self, self_id, user_id):
         """选择对手，给其发送对战请求。允许随机匹配。需要给自己显示等待，最多允许等待30秒"""
@@ -113,11 +109,15 @@ class Server(object):
     def close(self, self_id):
         """退出，删除其信息，关闭其网页"""
         del self.client[self_id]
-        message = {}
-        return message, [self.client[self_id]]
+        message = self.change(self_id)
+        return message, self.hall
 
     def change(self, self_id):
-        """返回所有成员"""
+        message = {'command': 'change', 'user_id': [], 'user_portrait': [], 'user_name': [], 'message': 'hall'}
         for user_id in self.hall:
             if user_id != self_id:
-                self.client[user_id].send(json.dumps({'hall': self.hall}).encode())
+                user = User.objects.get(id=user_id)
+                message['user_id'].append(user.id)
+                message['user_cover'].append(user.portrait.name)
+                message['user_name'].append(user.name)
+        return message
