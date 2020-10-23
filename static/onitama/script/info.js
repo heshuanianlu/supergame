@@ -1,5 +1,3 @@
-// import '/static/tools/jquery.js'
-
 function p(position){
     return $("#cont>table>tbody")
     .children("tr").eq(position[0])
