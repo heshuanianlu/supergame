@@ -19,7 +19,7 @@ function createWebSocket(url) {
     }
     catch (ex) {
         reconnect(url);
-        $('#tip').text(ex.message);
+        $('#tip>p').text(ex.message);
     }
 }
 function initEventHandle() {
@@ -35,27 +35,32 @@ function initEventHandle() {
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
         for (key in result) {
-            if (key == 'code') {
-                if (result['code'] == '0') {
-                    $('#tip>p').text('不登录还想玩游戏？');
-                } else if (result['code'] == '110') {
-                    $('#tip>p').text('在？话这么多？')
-                } else if (result['code'] == '001') {
-                    $('#tip>p').text('对方不在线哦！')
-                } else if (result['code'] == '010') {
-                    $('#tip>p').text('和自己说话很棒？')
-                }
-                setTimeout(function () { $('#tip').text('') }, 3000);  // 打印服务端返回的数据
+            if (key == 'error') {
+                var error=result['error'];
+                $('#tip>p').text(error);
+                setTimeout(function () { $('#tip>p').text('') }, 3000);  // 打印服务端返回的数据
             } else if (key == 'message') {
-                if (result['message']=='hall'){
+                var message=result['command'];
+                if (message=='change'){
                     var users=result['user_id'];
                     var names=result['user_name'];
                     var cover=result['user_portrait'];
                     var htmlData="";
                     for (var i=0;i<users.length;i++){
-                        data+=$("#cont>ul>li").html()+"<li><a href='"+users[i]+"'>"+names[i]+"</a></li>"
+                        data+=$("#cont>ul>li").html()
+                            +"<li><a href='"+users[i]+"'><p>"+names[i]+"</p><img src='/media/portrait/"+cover[i]+"'></a></li>"
                     }
                     $("#cont>ul>li").eq(2).html(htmlData);
+                }else if (message=='choose'){
+
+                }else if (message=='agree'){
+
+                }else if (message=='refuse'){
+
+                }else if (message=='action'){
+
+                }else if (message=='error'){
+                    alert(result['error']);
                 }
             }
         }

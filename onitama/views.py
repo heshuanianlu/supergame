@@ -29,9 +29,9 @@ def connect(request):
     for message in request.websocket:
         user_id = check_token(request)
         if not user_id:
-            request.websocket.send(json.dumps({"code": '0'}).encode())
+            request.websocket.send(json.dumps({"error": '还未登录'}).encode())
         elif not message:
-            request.websocket.send(json.dumps({"code": '收到了一条空信息'}).encode())
+            request.websocket.send(json.dumps({"error": '收到了一条空信息'}).encode())
         elif request.websocket.is_closed():
             # request.websocket.send(json.dumps({"code": '400'}).encode())
             del server.client[user_id]
@@ -42,7 +42,7 @@ def connect(request):
             message = message.decode()[2: -2]
 
             # 可能会报错，报错返回错误原因
-            message, client_list = server.get_message(message, user_id, request.websocket)
+            message, client_list = server.get_message(message, user_id)
 
             for _ in client_list:
                 server.client[_].send(json.dumps({"result": message}).encode())

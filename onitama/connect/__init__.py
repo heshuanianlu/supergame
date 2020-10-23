@@ -11,7 +11,6 @@ class Server(object):
         self.hall = []
         self.room = {}
         self.ready = []
-        # self.ready = {}
 
     def get_message(self, message: str, self_id):
         message = message.split('=')
@@ -32,7 +31,7 @@ class Server(object):
         elif message[0] == 'quit':  # quit=my_id
             message, client_list = self.close(self_id)
         else:
-            message, client_list = '无效消息', [self.client[self_id]]
+            message, client_list = {'command': 'error', 'error': '无效消息'}, [self.client[self_id]]
         return message, client_list
 
     def connect(self, self_id):
@@ -90,20 +89,24 @@ class Server(object):
     def action(self, self_id, room_id, piece, position, card_name):
         """移动到某个区域，需要参数房间号，点击的人，点击的位置，移动到的位置
             如果胜利，返回胜利/失败界面，并且创建返回大厅按钮"""
-        piece = piece[0], piece[1]
-        position = position[0], position[1]
         room = self.room[room_id]
-        piece = room.choose(piece)
-        room.move(piece, position)
-        client = self.client[room.tiv.user], self.client[room.siv.user]
-        message = {'command': 'action',
-                   'piece': piece,
-                   'position': position,
-                   'card': card_name}
-        if not room.victory:
-            room.rel_conn(card_name)
+        if self_id == room.tiv.user:
+            piece = piece[0], piece[1]
+            position = position[0], position[1]
+            piece = room.choose(piece)
+            room.move(piece, position)
+            client = self.client[room.tiv.user], self.client[room.siv.user]
+            message = {'command': 'action',
+                       'piece': piece,
+                       'position': position,
+                       'card': card_name}
+            if not room.victory:
+                room.rel_conn(card_name)
+            else:
+                message['victory'] = room.victory
         else:
-            message['victory'] = room.victory
+            message = {'command': 'error', 'error': '回合判定出错'}
+            client = self.client[self_id]
         return message, client
 
     def close(self, self_id):
@@ -113,7 +116,7 @@ class Server(object):
         return message, self.hall
 
     def change(self, self_id):
-        message = {'command': 'change', 'user_id': [], 'user_portrait': [], 'user_name': [], 'message': 'hall'}
+        message = {'command': 'change', 'user_id': [], 'user_portrait': [], 'user_name': []}
         for user_id in self.hall:
             if user_id != self_id:
                 user = User.objects.get(id=user_id)
