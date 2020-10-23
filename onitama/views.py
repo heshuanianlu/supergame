@@ -35,7 +35,7 @@ def connect(request):
         elif request.websocket.is_closed():
             # request.websocket.send(json.dumps({"code": '400'}).encode())
             del server.client[user_id]
-        elif message[:2] != '#!' or message[-2:] != '!#':
+        elif message[:2] != b'#!' or message[-2:] != b'!#':
             request.websocket.send(json.dumps({'error': '别想乱搞！'}).encode())
         else:
             server.client[user_id] = request.websocket
@@ -43,6 +43,12 @@ def connect(request):
 
             # 可能会报错，报错返回错误原因
             message, client_list = server.get_message(message, user_id)
+            print(message)
 
+            for _ in client_list:
+                server.client[_].send(json.dumps({"result": message}).encode())
+
+            message = server.change(user_id)
+            client_list = server.hall
             for _ in client_list:
                 server.client[_].send(json.dumps({"result": message}).encode())
