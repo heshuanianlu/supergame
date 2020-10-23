@@ -31,7 +31,7 @@ def connect(request):
         if not user_id:
             request.websocket.send(json.dumps({"code": '0'}).encode())
         elif not message:
-            print('收到了一条空信息！')
+            request.websocket.send(json.dumps({"code": '收到了一条空信息'}).encode())
         elif request.websocket.is_closed():
             # request.websocket.send(json.dumps({"code": '400'}).encode())
             del server.client[user_id]

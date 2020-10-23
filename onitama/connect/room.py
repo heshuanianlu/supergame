@@ -15,7 +15,7 @@ class Room(object):
         """
         玩家客户端->玩家对象
         """
-        h = hashlib.md5(str(r.id+b.id).encode())
+        h = hashlib.md5((str(r.id)+str(b.id)).encode())
         h.update(str(time.time()).encode())
         self.id = h.hexdigest()[-8:]
 
