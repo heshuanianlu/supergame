@@ -3,7 +3,6 @@ var lockReconnect = false;//避免重复连接
 var wsUrl = "ws://"+location.host+"/onitama/client";
 
 createWebSocket(wsUrl);
-//check_state();
 
 function createWebSocket(url) {
     try {
