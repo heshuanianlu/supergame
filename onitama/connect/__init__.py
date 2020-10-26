@@ -15,6 +15,7 @@ class Server(object):
         self.ready = []
 
     def get_message(self, message: str, self_id):
+        print(message)
         message = message.split('=')
         if message[0] == 'connect':  # connect=my_id
             message, client_list = self.connect(self_id)
@@ -32,6 +33,8 @@ class Server(object):
             message, client_list = self.action(self_id, room_id, piece, position, card_name)
         elif message[0] == 'quit':  # quit=my_id
             message, client_list = self.close(self_id)
+        elif message[0] == 'check':
+            message, client_list = {'command': 'check'}, [self.client[self_id]]
         else:
             message, client_list = {'command': 'error', 'error': '无效消息'}, [self.client[self_id]]
         print(message)
