@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'maps',
     'consumables',
     'onitama',
+    'dwebsocket',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'dwebsocket.middleware.WebSocketMiddleware',
 ]
 
 ROOT_URLCONF = 'supergame.urls'
@@ -155,3 +157,5 @@ APPEND_SLASH = False
 
 SESSION_COOKIE_AGE = 84600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+WEBSOCKET_ACCEPT_ALL = True

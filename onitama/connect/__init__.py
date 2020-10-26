@@ -34,9 +34,9 @@ class Server(object):
             message, client_list = self.close(self_id)
         else:
             message, client_list = {'command': 'error', 'error': '无效消息'}, [self.client[self_id]]
+        print(message)
         return message, client_list
 
-    @_print
     def connect(self, self_id):
         """检查用户当前状态，为重连返回战局，否则则返回大厅"""
         if self_id not in self.client.keys():
@@ -99,8 +99,8 @@ class Server(object):
             如果胜利，返回胜利/失败界面，并且创建返回大厅按钮"""
         room = self.room[room_id]
         if self_id == room.tiv.user:
-            piece = piece[0], piece[1]
-            position = position[0], position[1]
+            piece = int(piece[0]), int(piece[1])
+            position = int(position[0]), int(position[1])
             piece = room.choose(piece)
             room.move(piece, position)
             client = self.client[room.tiv.user], self.client[room.siv.user]

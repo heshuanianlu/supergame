@@ -1,8 +1,5 @@
-import html
 import json
-import re
 
-from django.views import View
 from dwebsocket import accept_websocket
 
 from django.shortcuts import render
@@ -26,8 +23,14 @@ def connect(request):
     if not request.is_websocket():
         return render(request, 'game/index.html', locals())
 
+    user_id = check_token(request)
+
+    if request.websocket in server.hall:
+        message = server.change(user_id)
+        server.client[user_id].send(json.dumps({"result": message}).encode())
+
     for message in request.websocket:
-        user_id = check_token(request)
+        print(message)
         if not user_id:
             request.websocket.send(json.dumps({"error": '还未登录'}).encode())
         elif not message:
@@ -43,11 +46,5 @@ def connect(request):
 
             # 可能会报错，报错返回错误原因
             message, client_list = server.get_message(message, user_id)
-            print(message)
-            for _ in client_list:
-                server.client[_].send(json.dumps({"result": message}).encode())
-
-            message = server.change(user_id)
-            client_list = server.hall
             for _ in client_list:
                 server.client[_].send(json.dumps({"result": message}).encode())
