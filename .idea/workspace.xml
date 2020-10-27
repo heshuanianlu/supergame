@@ -22,7 +22,6 @@
     <list default="true" id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="commit and push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onitama/connect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/connect/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onitama/templates/onitama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/templates/onitama/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onitama/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/onitama/script/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/websocket.js" afterDir="false" />
     </list>
@@ -310,7 +309,8 @@
       <workItem from="1603329176935" duration="4197000" />
       <workItem from="1603352126984" duration="2311000" />
       <workItem from="1603415436582" duration="18213000" />
-      <workItem from="1603674238183" duration="9673000" />
+      <workItem from="1603674238183" duration="11205000" />
+      <workItem from="1603785425705" duration="3583000" />
     </task>
     <task id="LOCAL-00001" summary="commit and push">
       <created>1603438636237</created>
@@ -403,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603677520309</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="commit and push">
+      <created>1603697393800</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1603697393800</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,6 +426,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit and push" />
@@ -486,10 +494,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603417272369" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603677531375">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603697395805">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603677531375" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603697395805" />
     <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

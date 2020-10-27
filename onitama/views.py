@@ -11,7 +11,7 @@ from users.views import check_token
 
 # Create your views here.
 def index(request):
-    content = 'room'
+    content = 'hall'
     return render(request, 'onitama/index.html', locals())
 
 
@@ -23,13 +23,12 @@ def connect(request):
     if not request.is_websocket():
         return render(request, 'game/index.html', locals())
 
-    user_id = check_token(request)
-
     # if request.websocket in server.hall:
-    #     message = server.change(user_id)
+    #     message = server.change()
     #     server.client[user_id].send(json.dumps({"result": message}).encode())
 
     for message in request.websocket:
+        user_id = check_token(request)
         if not user_id:
             request.websocket.send(json.dumps({"error": '还未登录'}).encode())
         elif not message:

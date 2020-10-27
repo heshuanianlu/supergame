@@ -40,7 +40,7 @@ function initEventHandle() {
                 $('#tip>p').text(error);
                 setTimeout(function () { $('#tip>p').text('') }, 3000);  // 打印服务端返回的数据
             } else if (key == 'result') {
-                var message=result['command'];
+                var message=result['result'];
                 if (message=='change'){
                     var users=result['user_id'];
                     var names=result['user_name'];
