@@ -81,6 +81,7 @@ def edit(request, action):
         return render(request, 'game/user.html', locals())
     elif request.method == 'POST':
         username = request.POST.get('username')
+        name = request.POST.get('name')
         password = request.POST.get('password')
         portrait = request.FILES.get('portrait')
         tip = ''
@@ -90,6 +91,8 @@ def edit(request, action):
             except Exception as e:
                 print(e)
                 tip += '用户名已存在！'
+        if name:
+            user.name = name
         if password:
             m = hashlib.md5(b'game_user')
             m.update(password.encode())

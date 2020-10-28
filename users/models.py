@@ -11,6 +11,7 @@ class User(models.Model):
     username = models.CharField('用户名', max_length=32, unique=True)
     password = models.CharField('密码', max_length=32)
 
+    name = models.CharField('用户昵称', max_length=64, default='无名小辈')
     portrait = models.ImageField('头像', upload_to='portrait/', default='none.jpg')
 
     created_time = models.DateTimeField('创建时间', auto_now_add=True)

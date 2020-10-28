@@ -130,5 +130,5 @@ class Server(object):
             user = User.objects.get(id=user_id)
             message['user_id'].append(user.id)
             message['user_portrait'].append(user.portrait.name)
-            message['user_name'].append(user.username)
+            message['user_name'].append(user.name)
         return message, self.hall

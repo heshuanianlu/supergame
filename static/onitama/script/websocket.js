@@ -34,7 +34,6 @@ function initEventHandle() {
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
         console.log(result);
-        console.log(123);
         for (key in result) {
             if (key == 'error') {
                 var error=result['error'];
@@ -43,19 +42,15 @@ function initEventHandle() {
             } else if (key == 'message') {
                 var message=result['message'];
                 var command=message['command'];
-                console.log(command);
                 if (command=='change'){
                     var users=message['user_id'];
                     var names=message['user_name'];
                     var cover=message['user_portrait'];
                     var htmlData="";
-                    console.log(users,names,cover);
                     for (var i=0;i<users.length;i++){
-                        data+=$("#cont>ul>li").html()
-                            +"<li><a href='"+users[i]+"'><p>"+names[i]+"</p><img src='/media/portrait/"+cover[i]+"'></a></li>"
+                        htmlData+="<li><a href='"+users[i]+"'><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>"
                     }
-                    console.log(htmlData);
-                    $("#cont>ul>li").eq(2).html(htmlData);
+                    $("#cont>ul>li").eq(1).children("ul").html(htmlData);
                 }else if (command=='choose'){
 
                 }else if (command=='agree'){
@@ -69,7 +64,6 @@ function initEventHandle() {
                 }
             }
         }
-        console.log(231)
     }
     //收到消息推送
 }

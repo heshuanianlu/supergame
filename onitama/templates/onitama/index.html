@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/tools/font.css">
     <script src="/static/onitama/script/websocket.js"></script>
     <script src="/static/onitama/script/info.js"></script>
+    <script src="/static/onitama/script/command.js"></script>
     <style>
         *{
             font-family: 'fankai';
@@ -260,7 +261,6 @@
             $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
             $(this).css("border-color","gold").css("box-shadow","0px 0px 6px gold");
         }
-        websocket.send('#!quit=my_id!#')
     })
 </script>
 
