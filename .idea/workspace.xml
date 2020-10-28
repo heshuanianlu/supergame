@@ -310,7 +310,8 @@
       <workItem from="1603352126984" duration="2311000" />
       <workItem from="1603415436582" duration="18213000" />
       <workItem from="1603674238183" duration="11205000" />
-      <workItem from="1603785425705" duration="3583000" />
+      <workItem from="1603785425705" duration="3713000" />
+      <workItem from="1603852570743" duration="1610000" />
     </task>
     <task id="LOCAL-00001" summary="commit and push">
       <created>1603438636237</created>
@@ -410,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603697393800</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="commit and push">
+      <created>1603790818106</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1603790818106</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -494,10 +502,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603417272369" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603697395805">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603790821666">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603697395805" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603790821666" />
     <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

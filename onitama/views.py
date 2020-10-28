@@ -45,4 +45,4 @@ def connect(request):
             # 可能会报错，报错返回错误原因
             message, client_list = server.get_message(message, user_id)
             for _ in client_list:
-                server.client[_].send(json.dumps({"result": message}).encode())
+                server.client[_].send(json.dumps({"message": message}).encode())

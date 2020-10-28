@@ -34,36 +34,42 @@ function initEventHandle() {
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
         console.log(result);
+        console.log(123);
         for (key in result) {
             if (key == 'error') {
                 var error=result['error'];
                 $('#tip>p').text(error);
                 setTimeout(function () { $('#tip>p').text('') }, 3000);  // 打印服务端返回的数据
-            } else if (key == 'result') {
-                var message=result['result'];
-                if (message=='change'){
-                    var users=result['user_id'];
-                    var names=result['user_name'];
-                    var cover=result['user_portrait'];
+            } else if (key == 'message') {
+                var message=result['message'];
+                var command=message['command'];
+                console.log(command);
+                if (command=='change'){
+                    var users=message['user_id'];
+                    var names=message['user_name'];
+                    var cover=message['user_portrait'];
                     var htmlData="";
+                    console.log(users,names,cover);
                     for (var i=0;i<users.length;i++){
                         data+=$("#cont>ul>li").html()
                             +"<li><a href='"+users[i]+"'><p>"+names[i]+"</p><img src='/media/portrait/"+cover[i]+"'></a></li>"
                     }
+                    console.log(htmlData);
                     $("#cont>ul>li").eq(2).html(htmlData);
-                }else if (message=='choose'){
+                }else if (command=='choose'){
 
-                }else if (message=='agree'){
+                }else if (command=='agree'){
 
-                }else if (message=='refuse'){
+                }else if (command=='refuse'){
 
-                }else if (message=='action'){
+                }else if (command=='action'){
 
-                }else if (message=='error'){
+                }else if (command=='error'){
                     alert(result['error']);
                 }
             }
         }
+        console.log(231)
     }
     //收到消息推送
 }

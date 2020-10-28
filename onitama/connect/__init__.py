@@ -42,11 +42,12 @@ class Server(object):
 
     def connect(self, self_id):
         """检查用户当前状态，为重连返回战局，否则则返回大厅"""
-        if self_id not in self.client.keys():
+        if self_id not in self.hall:
             self.hall.append(self_id)
-            return self.change()
-        else:
-            return {'command': 'error', 'error': '用户已登录'}, [self_id]
+            for t in self.ready:
+                if self_id in t:
+                    self.hall.remove(self_id)
+        return self.change()
 
     def choose(self, self_id, user_id):
         """选择对手，给其发送对战请求。允许随机匹配。需要给自己显示等待，最多允许等待30秒"""
@@ -126,10 +127,8 @@ class Server(object):
     def change(self):
         message = {'command': 'change', 'user_id': [], 'user_portrait': [], 'user_name': []}
         for user_id in self.hall:
-            for _id in self.hall:
-                if user_id != _id:
-                    user = User.objects.get(id=user_id)
-                    message['user_id'].append(user.id)
-                    message['user_cover'].append(user.portrait.name)
-                    message['user_name'].append(user.name)
+            user = User.objects.get(id=user_id)
+            message['user_id'].append(user.id)
+            message['user_portrait'].append(user.portrait.name)
+            message['user_name'].append(user.username)
         return message, self.hall
