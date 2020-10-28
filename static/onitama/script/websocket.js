@@ -30,6 +30,7 @@ function initEventHandle() {
     };
     websocket.onopen = function (evnt) {
         websocket.send('#!connect=my_id!#');
+        show(websocket);
     };
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
@@ -48,19 +49,48 @@ function initEventHandle() {
                     var cover=message['user_portrait'];
                     var htmlData="";
                     for (var i=0;i<users.length;i++){
-                        htmlData+="<li><a href='"+users[i]+"'><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>"
+                        if (users[i]==self_id){
+                            $("#cont #room>ul").html("<li id='"+users[i]+"'><a><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>");
+                        }else{
+                            htmlData+="<li id='"+users[i]+"'><a><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>";
+                        }
                     }
-                    $("#cont>ul>li").eq(1).children("ul").html(htmlData);
+                    $("#cont #xian>ul").html(htmlData);show(websocket);
                 }else if (command=='choose'){
+                    var tiv=message['tiv'];
+                    var siv=message['siv'];
+                    var timeout=30;
+                    var clock=setInterval(function(){
+                        timeout--;
+                        var htmlData="";
+                        if (tiv['id']==self_id){
+                            htmlData+="<p>你对</p><p>"+siv['name']+"</p><p>发起了邀请</p>";
+                            htmlData+="<img src='/media/"+siv['portrait']+"'>";
+                            htmlData+="<p>等待"+timeout+"秒</p>";
 
+                        }else if(siv['id']==self_id){
+                            htmlData+="<p>你收到了</p><p>"+tiv['name']+"</p><p>的邀请</p>";
+                            htmlData+="<img src='/media/"+tiv['portrait']+"'>";
+                            htmlData+="<p>等待"+timeout+"秒</p>";
+
+                        }
+                        $("#alert").html(htmlData).css("display","block");
+                        if (timeout==0){
+                            clearInterval(clock);
+                            if (tiv['id']==self_id){
+                            }else if(siv['id']==self_id){
+                                websocket.send("#!refuse="+tiv['id']+"!#");
+                            }
+                        }
+                    },1000)
                 }else if (command=='agree'){
 
                 }else if (command=='refuse'){
-
+                    $("#alert").html("").css("display","none");
                 }else if (command=='action'){
 
                 }else if (command=='error'){
-                    alert(result['error']);
+                    alert(message['error']);
                 }
             }
         }

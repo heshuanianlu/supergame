@@ -47,16 +47,32 @@ class Server(object):
             for t in self.ready:
                 if self_id in t:
                     self.hall.remove(self_id)
+                    break
         return self.change()
 
     def choose(self, self_id, user_id):
         """选择对手，给其发送对战请求。允许随机匹配。需要给自己显示等待，最多允许等待30秒"""
-        if self_id in self.hall and user_id in self.hall:
+        if self_id == user_id:
+            message = {'command': 'error', 'error': '不能选择自己'}
+            return message, [self_id]
+        elif self_id in self.hall and user_id in self.hall:
             self.hall.remove(user_id)
             self.hall.remove(self_id)
             client = self_id, user_id
             self.ready.append(client)
-            message = {'command': 'choose', 'tiv': self_id, 'siv': user_id}
+            message = {'command': 'choose'}
+            tiv = User.objects.get(id=self_id)
+            siv = User.objects.get(id=user_id)
+            message['tiv'] = {
+                'id': tiv.id,
+                'portrait': tiv.portrait.name,
+                'name': tiv.name
+            }
+            message['siv'] = {
+                'id': siv.id,
+                'portrait': siv.portrait.name,
+                'name': siv.name
+            }
             return message, [self_id, user_id]
         else:
             message = {'command': 'error', 'error': '你或对方不在大厅中'}
@@ -120,6 +136,12 @@ class Server(object):
     def close(self, self_id):
         """退出，删除其信息，关闭其网页"""
         del self.client[self_id]
+        for t in self.ready:
+            if self_id in t:
+                for _ in t:
+                    self.hall.append(self_id)
+                self.ready.remove(t)
+                break
         if self_id in self.hall:
             self.hall.remove(self_id)
         return self.change()

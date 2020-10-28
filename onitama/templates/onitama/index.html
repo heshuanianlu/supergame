@@ -13,9 +13,9 @@
     <script src="/static/tools/vue.js"></script>
     <link rel="stylesheet" href="/static/tools/style.css">
     <link rel="stylesheet" href="/static/tools/font.css">
-    <script src="/static/onitama/script/websocket.js"></script>
     <script src="/static/onitama/script/info.js"></script>
     <script src="/static/onitama/script/command.js"></script>
+    <script src="/static/onitama/script/websocket.js"></script>
     <style>
         *{
             font-family: 'fankai';
@@ -54,7 +54,20 @@
             font-size: 24px;
             background-color: rgba(255, 255, 255, 0.3);
         }
-        
+
+        #alert{
+            width: 70%;
+            height: 40%;
+            position: absolute;
+            z-index: 9999;
+            top: 25%;
+            left: 15%;
+            border: 3px solid #999;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.75);
+            font-size: 1.2em;
+            display: none;
+        }
         #tip, #beian{
             height: 2%;
             width: 100%;
@@ -68,6 +81,12 @@
             border: 1px solid gray;
             border-left: none;
             border-right: none;
+        }
+
+        #alert>img{
+            width: 30%;
+            display: block;
+            margin: auto;
         }
 
         #cont>ul{
@@ -109,10 +128,12 @@
             border-radius: 5%;
             border-color: black;
             transition: all 0.5s;
+            font-size: 0.7em;
         }
         #cont li>ul>li:hover{
             transform: scale(0.95);
             border: 5px solid gold;
+            font-size: 0.66em;
         }
         #cont li>ul>li>a{
             display: block;
@@ -124,7 +145,6 @@
             width: 90%;
             margin: 5% auto;
             height: 30%;
-            font-size: 0.7em;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
@@ -177,35 +197,18 @@
 
 <div class="screen">
     <div id="tip"><p></p></div>
+    <div id="alert"><p></p></div>
     <div id="cont">
         {% if content == 'hall' %}
         <ul>
-            <li>
-                <h3 class="title">我的房间</h3>
-                <ul>
-                    <li><a><p>我</p><img src="/media/portrait/none.jpg"></a></li>
-                    <li><a><p>我的对手</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                </ul>
+            <li id="room">
+                <h3 class="title">我的房间</h3><ul></ul>
             </li>
-            <li>
-                <h3 class="title">空闲中</h3>
-                <ul>
-                    <li><a><p>张三</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>张伞</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>王五</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>王舞</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                </ul>
+            <li id="xian">
+                <h3 class="title">空闲中</h3><ul></ul>
             </li>
-            <li>
-                <h3 class="title">游戏中</h3>
-                <ul>
-                    <li><a><p>李四</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>李思</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>赵柳</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>赵六</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>宋琪</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                    <li><a><p>宋七</p><img src="/static/onitama/other/timg0.jpg"></a></li>
-                </ul>
+            <li id="game">
+                <h3 class="title">游戏中</h3><ul></ul>
             </li>
         </ul>
         {% elif content == 'room' %}
@@ -231,6 +234,7 @@
 </div>
 
 <script>
+    var self_id='{{ user_id }}';
     function ready(){
         $("body").css("width",$(window).width()).css("height",$(window).height());
         var rate=827.2/465.3; // 高/宽
@@ -243,6 +247,9 @@
         }
         $(".screen").css("height",height+"px").css("width",width+"px").css("border","none");
         $("body>div").css("font-size",height*0.02/15.24*24);
+        // $("#alert").css("height",0.4*height+"px").css("width",0.7*width+"px");
+
+        $("#alert>img").each(function(){$(this).css("height",$(this).css("width"))});
 
         $("li>ul").each(function(){$(this).height($(this).parent().height()-$(this).prev().height()*1.5)});
         // $("li>ul>li").css("height",100/170*0.23*0.96*height+"px").css("width",100/170*0.23*0.96*height+"px");
@@ -256,12 +263,6 @@
         $("tbody").children("tr").eq(4).children("td").eq(2).css("background","blue url('/static/onitama/other/timg0.jpg')");
     }
     setInterval(ready,1);
-    $(".me>img").click(function(){
-        if(true){
-            $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
-            $(this).css("border-color","gold").css("box-shadow","0px 0px 6px gold");
-        }
-    })
 </script>
 
 </body>
