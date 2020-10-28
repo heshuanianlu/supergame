@@ -88,11 +88,13 @@ def edit(request, action):
         if username:
             try:
                 user.username = username
+                tip += '用户名修改成功！'
             except Exception as e:
                 print(e)
                 tip += '用户名已存在！'
         if name:
             user.name = name
+            tip += '昵称修改成功！'
         if password:
             m = hashlib.md5(b'game_user')
             m.update(password.encode())
