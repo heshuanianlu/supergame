@@ -30,7 +30,6 @@ function initEventHandle() {
     };
     websocket.onopen = function (evnt) {
         websocket.send('#!connect=my_id!#');
-        show(websocket);
     };
     websocket.onmessage = function (evnt) {
         var result = JSON.parse(evnt.data);
@@ -55,26 +54,27 @@ function initEventHandle() {
                             htmlData+="<li id='"+users[i]+"'><a><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>";
                         }
                     }
-                    $("#cont #xian>ul").html(htmlData);show(websocket);
+                    $("#cont #xian>ul").html(htmlData);choose(websocket);
                 }else if (command=='choose'){
                     var tiv=message['tiv'];
                     var siv=message['siv'];
                     var timeout=30;
+                    var htmlData="";
+                    if (tiv['id']==self_id){
+                        htmlData+="<p>你对</p><p>"+siv['name']+"</p><p>发起了邀请</p>";
+                        htmlData+="<img src='/media/"+siv['portrait']+"'>";
+                        htmlData+="<p>等待<em>"+timeout+"</em>秒</p>";
+                        htmlData+="<p>正在等待对方同意</p>"
+                    }else if(siv['id']==self_id){
+                        htmlData+="<p>你收到了</p><p>"+tiv['name']+"</p><p>的邀请</p>";
+                        htmlData+="<img src='/media/"+tiv['portrait']+"'>";
+                        htmlData+="<p>等待<em>"+timeout+"</em>秒</p>";
+                        htmlData+="<button id='agree'>同意</button><button id='refuse'>拒绝</button>"
+                    }
+                    $("#alert").html(htmlData).css("display","block");agref(websocket,tiv['id']);
                     var clock=setInterval(function(){
                         timeout--;
-                        var htmlData="";
-                        if (tiv['id']==self_id){
-                            htmlData+="<p>你对</p><p>"+siv['name']+"</p><p>发起了邀请</p>";
-                            htmlData+="<img src='/media/"+siv['portrait']+"'>";
-                            htmlData+="<p>等待"+timeout+"秒</p>";
-
-                        }else if(siv['id']==self_id){
-                            htmlData+="<p>你收到了</p><p>"+tiv['name']+"</p><p>的邀请</p>";
-                            htmlData+="<img src='/media/"+tiv['portrait']+"'>";
-                            htmlData+="<p>等待"+timeout+"秒</p>";
-
-                        }
-                        $("#alert").html(htmlData).css("display","block");
+                        $("em").text(timeout);
                         if (timeout==0){
                             clearInterval(clock);
                             if (tiv['id']==self_id){
@@ -86,7 +86,7 @@ function initEventHandle() {
                 }else if (command=='agree'){
 
                 }else if (command=='refuse'){
-                    $("#alert").html("").css("display","none");
+                    clearInterval(clock);$("#alert").html("").css("display","none");
                 }else if (command=='action'){
 
                 }else if (command=='error'){

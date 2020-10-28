@@ -15,7 +15,7 @@ class Room(object):
         """
         玩家客户端->玩家对象
         """
-        h = hashlib.md5((str(r.id)+str(b.id)).encode())
+        h = hashlib.md5((str(r)+str(b)).encode())
         h.update(str(time.time()).encode())
         self.id = h.hexdigest()[-8:]
 
@@ -67,3 +67,17 @@ class Room(object):
                 self.siv.cards.append(card)
                 self.tiv, self.siv = self.siv, self.tiv
                 break
+
+    def name(self):
+        r_cards, b_cards = [], []
+        if self.tiv.cards[2].seq == 'red':
+            r, b = self.tiv, self.siv
+        elif self.tiv.cards[2].seq == 'blue':
+            b, r = self.tiv, self.siv
+        else:
+            raise
+        for card in r.cards:
+            r_cards.append(card.name)
+        for card in b.cards:
+            b_cards.append(card.name)
+        return (r.user, r_cards), (b.user, b_cards)

@@ -22,7 +22,7 @@ class Server(object):
         elif message[0] == 'choose':  # choose=0
             user_id = int(message[1])
             message, client_list = self.choose(self_id, user_id)
-        elif message[0] == 'agree=':  # agree=0
+        elif message[0] == 'agree':  # agree=0
             user_id = int(message[1])
             message, client_list = self.agree(self_id, user_id)
         elif message[0] == 'refuse':  # refuse=0
@@ -42,12 +42,14 @@ class Server(object):
 
     def connect(self, self_id):
         """检查用户当前状态，为重连返回战局，否则则返回大厅"""
+        for t in self.ready:
+            if self_id in t:
+                for _ in t:
+                    self.hall.append(_)
+                self.ready.remove(t)
+                break
         if self_id not in self.hall:
             self.hall.append(self_id)
-            for t in self.ready:
-                if self_id in t:
-                    self.hall.remove(self_id)
-                    break
         return self.change()
 
     def choose(self, self_id, user_id):
@@ -83,16 +85,8 @@ class Server(object):
         if (user_id, self_id) in self.ready:
             room = Room(self_id, user_id)
             self.room[room.id] = room
-            message = {'command': 'agree'}
-            if room.tiv.cards[2].seq == 'red':
-                message['red'] = room.tiv.cards
-                message['blue'] = room.siv.cards
-            elif room.tiv.cards[2].seq == 'blue':
-                message['red'] = room.siv.cards
-                message['blue'] = room.tiv.cards
-            else:
-                del self.room[room.id]
-                return self.agree(self_id, user_id)
+            cards = room.name()
+            message = {'command': 'agree', 'red': cards[0], 'blue': cards[1]}
             return message, [user_id, self_id]
         else:
             message = {'command': 'error', 'error': '查询不到匹配信息'}
@@ -139,7 +133,7 @@ class Server(object):
         for t in self.ready:
             if self_id in t:
                 for _ in t:
-                    self.hall.append(self_id)
+                    self.hall.append(_)
                 self.ready.remove(t)
                 break
         if self_id in self.hall:
