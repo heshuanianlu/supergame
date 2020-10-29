@@ -1,8 +1,9 @@
 function chooseCard(){
-    $(".me>img").click(function(){
+    $(".card").last().children("img").click(function(){
         if(true){
             $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
             $(this).css("border-color","gold").css("box-shadow","0px 0px 6px gold");
+            chooseDCard=room.getCard($(this).attr("name"));
         }
     });
 }
@@ -10,8 +11,9 @@ function chooseCard(){
 function choosePiece(){
     $("#cont>table>tbody td").click(function(){
         if(true){
-            $("td").css("color","black");
-            $(this).css("color","gold");
+            $("td").css("border-color","black");
+            $(this).css("border-color","gold");
+            choosedPiece=room.getPiece(d($(this)));
         }
     })
 }

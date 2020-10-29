@@ -1,8 +1,19 @@
 function p(position){
     return $("#cont>table>tbody")
-    .children("tr").eq(position[0])
-    .children("td").eq(position[1])
+    .children("tr").eq(5-position[0])
+    .children("td").eq(4-position[1])
 }
+
+function d(jqObj){
+    for (var i=0;i<5;i++){
+        for (var j=0;j<5;j++){
+            if (p([i,j])===jqObj){
+                return [i,j]
+            }
+        }
+    }
+}
+
 function showCards(selector,cards){
     var htmlData="";
     for(var i=0;i<cards.length;i++){
@@ -12,7 +23,8 @@ function showCards(selector,cards){
 }
 function showPieces(pieces){
     for (var i=0;i<pieces.length;i++){
-        p(pieces[i].position).text(pieces[i].boss).css("color",pieces[i].color);
+        console.log(pieces[i]);
+        p(pieces[i].position).text(pieces[i].boss).css("color",pieces[i].color).addClass(pieces[i].color);
     }
 }
 
@@ -31,7 +43,7 @@ function Card(name, method, color){
     card.showMove=function(tr, td){
         var result=this.getResult(tr, td);
         for(var i=0;i<result;i++){
-            p(result[i]).html("<p class='circle'>+</p>");
+            p(result[i]).text("○");
         }
     }
     card.check=function(tr, td, position){
@@ -85,10 +97,10 @@ function Player(color, user_id){
 function Room(r,b){
     var room=new Object;
     room.pr=r[0];
-    room.r_cards=r[1];
+    room.r_cards=new Array();
     room.r_pieces=new Array();
     room.pb=b[0];
-    room.b_cards=b[1];
+    room.b_cards=new Array();
     room.b_pieces=new Array();
     room.cardList=new Array();
     room.pieceList=new Array();
@@ -109,7 +121,7 @@ function Room(r,b){
     room.runPiece=function (color, r){
         var pieceList=new Array();
         for (var i=0;i<5;i++){
-            var piece=Piece((r,i),color)
+            var piece=Piece([r,i],color)
             if(i==2){piece.boss='师';}
             pieceList.push(piece);
             room.pieceList.push(piece);
@@ -127,9 +139,9 @@ function Room(r,b){
             +'</table><figure class="card"></figure>'
         )
     }
-    room.start=function(self_id){
-        for(i in r[1]){room.cardList.push(room.getCard(i))};
-        for(i in b[1]){room.cardList.push(room.getCard(i))};
+    room.start=function(){
+        for(i in r[1]){card=room.getCard(r[1][i]);room.cardList.push(card);room.r_cards.push(card);};
+        for(i in b[1]){card=room.getCard(b[1][i]);room.cardList.push(card);room.b_cards.push(card);};
         if (self_id==r[0]){
             var red=1,blue=5;
             var me="red",an="blue";
@@ -139,8 +151,8 @@ function Room(r,b){
         }
         room.r_pieces=room.runPiece('red',red);
         room.b_pieces=room.runPiece('blue',blue);
-        $("#cont figure").eq(2).addClass(me);
-        $("#cont figure").eq(0).addClass(an);
+        $(".card").last().addClass(me);
+        $(".card").first().addClass(an);
     }
     room.ref=function(card_name,pieceP,position,victory){
         var card=room.getCard(card_name);
@@ -164,6 +176,11 @@ function Room(r,b){
     return room;
 }
 
-
+function Action(){
+    if(choosedPiece && choosedCard){
+        var tr=choosedPiece.position[0],td=choosedPiece.position[1];
+        choosedCard.showMove(tr, td);
+    }
+}
 
 
