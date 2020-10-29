@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="commit and push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onitama/templates/onitama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/templates/onitama/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/onitama/script/command.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/command.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/onitama/script/info.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/info.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/onitama/script/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/websocket.js" afterDir="false" />
     </list>
@@ -313,7 +311,7 @@
       <workItem from="1603674238183" duration="11205000" />
       <workItem from="1603785425705" duration="3713000" />
       <workItem from="1603852570743" duration="14854000" />
-      <workItem from="1603933927918" duration="4270000" />
+      <workItem from="1603933927918" duration="5460000" />
     </task>
     <task id="LOCAL-00001" summary="commit and push">
       <created>1603438636237</created>
@@ -469,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603876090009</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="commit and push">
+      <created>1603953274723</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1603953274723</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,14 +554,14 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1492" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1603186242675" />
-    <state x="270" y="76" key="SettingsEditor" timestamp="1603856688206">
+    <state x="270" y="76" key="SettingsEditor" timestamp="1603953839836">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603856688206" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603876092531">
+    <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603953839836" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603953861211">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603876092531" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603953861211" />
     <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

@@ -75,7 +75,7 @@ function initEventHandle() {
                     }
                     $("#alert").html(htmlData).css("display","block");
                     agref(websocket,tiv['id']);
-                    var clock=setInterval(function(){
+                    clock=setInterval(function(){
                         timeout--;
                         $("em").text(timeout);
                         if (timeout==0){
@@ -89,7 +89,7 @@ function initEventHandle() {
                     clearInterval(clock);
                     $("#alert").html("").css("display","none");
                     var room=Room(message['red'],message['blue']);
-                    room.map();room.showMap();
+                    room.start();room.map();room.showMap();
                     chooseCard();choosePiece();
                 }else if (command=='refuse'){
                     clearInterval(clock);
