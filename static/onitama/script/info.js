@@ -11,8 +11,8 @@ function Card(name, method, color){
     card.color=color;
     card.getResult=function(tr, td){
         var result=[];
-        for(var i=0;i<this.method;i++){
-            this.result.append((tr+this.method[i][0],td+this.method[i][1]));
+        for(var i=0;i<card.method;i++){
+            card.result.append((tr+card.method[i][0],td+card.method[i][1]));
         }
         return result
     }
@@ -23,23 +23,23 @@ function Card(name, method, color){
         }
     }
     card.check=function(tr, td, position){
-        if(position in this.getResult(tr, td))return True;
+        if(position in card.getResult(tr, td))return True;
     }
     card.show=function(imgEle){
-        $(imgEle).setAttr("src","/static/onitama/card/"+this.name+".jpg").setAttr("name",this.name)
+        $(imgEle).setAttr("src","/static/onitama/card/"+card.name+".jpg").setAttr("name",card.name)
     }
     return card;
 }
 
-function Piece(position, color, boss=false){
+function Piece(position, color, boss='徒'){
     var piece=new Object;
     piece.position=position;
     piece.color=color;
     piece.boss=boss;
     piece.move=function(position){
-        p(position).html(p(this.position).html());
-        p(this.position).html("");
-        this.position=position;
+        p(position).html(piece.boss);
+        p(piece.position).html("");
+        piece.position=position;
     }
     return piece;
 }
@@ -70,36 +70,100 @@ function Player(color, user_id){
     return player
 }
 
-function Room(pr,pb){
+function Room(r,b){
     var room=new Object;
-    room.pr=pr;
-    room.pb=pb;
-    room.start=function(cardNameList){
-        function getCard(cardName){
-            for(var i=0;i<LI.length;i++){
-                if (cardName==LI[i].name){
-                    return LI[i]
-                }
+    room.pr=r[0];
+    room.r_cards=r[1];
+    room.r_pieces=[];
+    room.pb=b[0];
+    room.b_cards=b[1];
+    room.b_pieces=[];
+    room.cardList=[];
+    room.pieceList=[];
+    room.getCard=function (cardName){
+        for(var i=0;i<LI.length;i++){
+            if (cardName==LI[i].name){
+                return LI[i]
             }
         }
-        function runPiece(color, r){
-            var pieceList=[]
-            for (var i=0;i<5;i++){
-                var piece=Piece((r,i),color)
-                if(i==2){
-                    piece.boss=true;
-                }
-                pieceList.append(piece)
+    }
+    room.getPiece=function (position){
+        for(var i=0;i<room.pieceList.length;i++){
+            if (room.pieceList[i].position=position){
+                return room.pieceList[i]
             }
-            return pieceList
         }
-        var cardList=[];
-        for(i in cardNameList){cardList.append(getCard(i))};
-        pr.piece=runPiece('red', 1);
-        pb.piece=runPiece('blue', 5)
+    }
+    room.runPiece=function (color, r){
+        var pieceList=[]
+        for (var i=0;i<5;i++){
+            var piece=Piece((r,i),color)
+            if(i==2){piece.boss='师';}
+            pieceList.append(piece);
+            room.pieceList.append(piece);
+        }
+        return pieceList
+    }
+    room.map=function(){
+        $("#cont").html(
+            '<figure class="card"></figure><table>'
+            +'<tr><td></td><td></td><td></td><td></td><td></td></tr>'
+            +'<tr><td></td><td></td><td></td><td></td><td></td></tr>'
+            +'<tr><td></td><td></td><td></td><td></td><td></td></tr>'
+            +'<tr><td></td><td></td><td></td><td></td><td></td></tr>'
+            +'<tr><td></td><td></td><td></td><td></td><td></td></tr>'
+            +'</table><figure class="card"></figure>'
+        )
+    }
+    room.start=function(self_id){
+        for(i in r[1]){room.cardList.append(room.getCard(i))};
+        for(i in b[1]){room.cardList.append(room.getCard(i))};
+        if (self_id==r[0]){
+            var red=1,blue=5;
+            var me="red",an="blue";
+        }else if(self_id==b[0]){
+            var blue=1,red=5;
+            var me="blue",an="red";
+        }
+        room.r_pieces=room.runPiece('red',red);
+        room.b_pieces=room.runPiece('blue',blue);
+        $("#cont figure").eq(2).addClass(me);
+        $("#cont figure").eq(0).addClass(an);
+    }
+    room.ref=function(card_name,pieceP,position,victory){
+        var card=room.getCard(card_name);
+        var piece=room.getPiece(pieceP);
+        var other=room.getPiece(position);
+        if (other){room.pieceList.remove(other)}
+        piece.move(position);
+        if(room.b_cards.includes(card)){
+            room.b_cards.remove(card);
+            room.r_cards.append(card);
+        }else if(room.b_cards.includes(card)){
+            room.r_cards.remove(card);
+            room.b_cards.append(card);
+        }
+    }
+    room.showMap=function(){
+        function showCards(selector,cards){
+            var htmlData="";
+            for(var i=0;i<cards.length;i++){
+                htmlData+="<img src='/static/onitama/card/"+cards[i].name+".jpg'>";
+            }
+            $(selector).html(htmlData);
+        }
+        function showPieces(pieces){
+            for (var i=0;i<pieces.length;i++){
+                p.text(pieces[i].boss).css("color",pieces[i].color);
+            }
+        }
+        showCards(".red",room.r_cards);
+        showCards(".blue",room.b_cards);
+        showPieces(room.pieceList);
     }
     return room;
 }
+
 
 
 

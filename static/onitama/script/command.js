@@ -7,6 +7,15 @@ function chooseCard(){
     });
 }
 
+function choosePiece(){
+    $("#cont>table>tbody td").click(function(){
+        if(true){
+            $("td").css("color","black");
+            $(this).css("color","gold");
+        }
+    })
+}
+
 function choose(websocket){
     $("#cont #xian>ul>li").click(function(){
         message='#!choose='+$(this).attr("id")+'!#';

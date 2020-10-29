@@ -54,7 +54,9 @@ function initEventHandle() {
                             htmlData+="<li id='"+users[i]+"'><a><p>"+names[i]+"</p><img src='/media/"+cover[i]+"'></a></li>";
                         }
                     }
-                    $("#cont #xian>ul").html(htmlData);choose(websocket);
+                    $("#cont #xian>ul").html(htmlData);
+                    $("#cont #game>ul").html("");
+                    choose(websocket);
                 }else if (command=='choose'){
                     var tiv=message['tiv'];
                     var siv=message['siv'];
@@ -71,12 +73,12 @@ function initEventHandle() {
                         htmlData+="<p>等待<em>"+timeout+"</em>秒</p>";
                         htmlData+="<button id='agree'>同意</button><button id='refuse'>拒绝</button>"
                     }
-                    $("#alert").html(htmlData).css("display","block");agref(websocket,tiv['id']);
+                    $("#alert").html(htmlData).css("display","block");
+                    agref(websocket,tiv['id']);
                     var clock=setInterval(function(){
                         timeout--;
                         $("em").text(timeout);
                         if (timeout==0){
-                            clearInterval(clock);
                             if (tiv['id']==self_id){
                             }else if(siv['id']==self_id){
                                 websocket.send("#!refuse="+tiv['id']+"!#");
@@ -84,9 +86,14 @@ function initEventHandle() {
                         }
                     },1000)
                 }else if (command=='agree'){
-
+                    clearInterval(clock);
+                    $("#alert").html("").css("display","none");
+                    var room=Room(message['red'],message['blue']);
+                    room.map();room.showMap();
+                    chooseCard();choosePiece();
                 }else if (command=='refuse'){
-                    clearInterval(clock);$("#alert").html("").css("display","none");
+                    clearInterval(clock);
+                    $("#alert").html("").css("display","none");
                 }else if (command=='action'){
 
                 }else if (command=='error'){
