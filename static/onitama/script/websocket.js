@@ -88,7 +88,7 @@ function initEventHandle() {
                 }else if (command=='agree'){
                     clearInterval(clock);
                     $("#alert").html("").css("display","none");
-                    var room=Room(message['red'],message['blue']);
+                    room=Room(message['red'],message['blue']);
                     room.map();room.start();room.showMap();
                     chooseCard();choosePiece();
                 }else if (command=='refuse'){

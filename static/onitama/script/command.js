@@ -1,9 +1,13 @@
+var choosedPiece=null,chooseDCard=null;
+
+
 function chooseCard(){
     $(".card").last().children("img").click(function(){
         if(true){
             $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
             $(this).css("border-color","gold").css("box-shadow","0px 0px 6px gold");
             chooseDCard=room.getCard($(this).attr("name"));
+            action();
         }
     });
 }
@@ -13,9 +17,17 @@ function choosePiece(){
         if(true){
             $("td").css("border-color","black");
             $(this).css("border-color","gold");
-            choosedPiece=room.getPiece(d($(this)));
+            choosedPiece=d($(this));
+            action();
         }
     })
+}
+
+function action(){
+    if(choosedPiece && choosedCard){
+        var tr=choosedPiece[0],td=choosedPiece[1];
+        choosedCard.showMove(tr, td);
+    }
 }
 
 function choose(websocket){

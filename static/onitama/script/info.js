@@ -23,7 +23,6 @@ function showCards(selector,cards){
 }
 function showPieces(pieces){
     for (var i=0;i<pieces.length;i++){
-        console.log(pieces[i]);
         p(pieces[i].position).text(pieces[i].boss).css("color",pieces[i].color).addClass(pieces[i].color);
     }
 }
@@ -42,6 +41,7 @@ function Card(name, method, color){
     }
     card.showMove=function(tr, td){
         var result=this.getResult(tr, td);
+        console.log(result);
         for(var i=0;i<result;i++){
             p(result[i]).text("○");
         }
@@ -176,11 +176,5 @@ function Room(r,b){
     return room;
 }
 
-function Action(){
-    if(choosedPiece && choosedCard){
-        var tr=choosedPiece.position[0],td=choosedPiece.position[1];
-        choosedCard.showMove(tr, td);
-    }
-}
 
 
