@@ -88,14 +88,16 @@ function initEventHandle() {
                 }else if (command=='agree'){
                     clearInterval(clock);
                     $("#alert").html("").css("display","none");
-                    room=Room(message['red'],message['blue']);
+                    room=Room(message['red'],message['blue'],message['id']);
                     room.map();room.start();room.showMap();
-                    chooseCard();choosePiece();
+                    chooseCard(websocket);choosePiece(websocket);
                 }else if (command=='refuse'){
                     clearInterval(clock);
                     $("#alert").html("").css("display","none");
                 }else if (command=='action'){
-
+                    room.relCoon(message['card'],ref(message['piece']),ref(message['position']),message['victory']);
+                    yuan();room.showMap();
+                    chooseCard(websocket);choosePiece(websocket);
                 }else if (command=='error'){
                     alert(message['error']);
                 }

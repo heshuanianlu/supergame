@@ -86,7 +86,7 @@ class Server(object):
             room = Room(self_id, user_id)
             self.room[room.id] = room
             cards = room.name()
-            message = {'command': 'agree', 'red': cards[0], 'blue': cards[1]}
+            message = {'command': 'agree', 'red': cards[0], 'blue': cards[1], 'id': room.id}
             return message, [user_id, self_id]
         else:
             message = {'command': 'error', 'error': '查询不到匹配信息'}
@@ -111,17 +111,20 @@ class Server(object):
         if self_id == room.tiv.user:
             piece = int(piece[0]), int(piece[1])
             position = int(position[0]), int(position[1])
-            piece = room.choose(piece)
-            room.move(piece, position)
-            client = [room.tiv.user, room.siv.user]
             message = {'command': 'action',
                        'piece': piece,
                        'position': position,
-                       'card': card_name}
-            if not room.victory:
-                room.rel_conn(card_name)
-            else:
+                       'card': card_name,
+                       'victory': ''}
+            piece = room.choose(piece)
+            print('\n\n\n',piece,'\n\n\n')
+            room.move(piece, position)
+            room.rel_conn(card_name)
+            client = [room.tiv.user, room.siv.user]
+            if room.victory:
                 message['victory'] = room.victory
+                # self.ready.remove(room_id)
+                del self.room[room_id]
         else:
             message = {'command': 'error', 'error': '回合判定出错'}
             client = [self_id]

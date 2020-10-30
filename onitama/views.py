@@ -45,8 +45,6 @@ def connect(request):
             server.client[user_id] = request.websocket
             message = message.decode()[2: -2]
 
-            print(server.ready)
-            # server.ready=[]
             # 可能会报错，报错返回错误原因
             message, client_list = server.get_message(message, user_id)
             for _ in client_list:

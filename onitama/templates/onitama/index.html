@@ -177,6 +177,7 @@
             margin: auto;
             width: 90%;
             border: 5px solid black;
+            background-color: rgba(200, 200, 200, 0.3);
             /* border-collapse: collapse; */
         }
         #cont>table tr>td{
@@ -193,6 +194,7 @@
             border: 1px solid transparent;
             display: flex;
             justify-content: space-around;
+            background-color: rgba(200, 200, 200, 0.3);
         }
         #cont>figure>img{
             border: 1px solid black;
@@ -204,9 +206,13 @@
         #cont>figure.card:nth-child(1)>img{
             transform: rotate(180deg);
         }
-        /* figure.me>img:nth-child(3){
-            -webkit-filter: grayscale(10%);
-        } */
+        figure.card>img:nth-child(3){
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+        .red,.blue{
+            cursor: pointer;
+        }
         
     </style>
 
