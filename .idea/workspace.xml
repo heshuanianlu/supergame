@@ -22,11 +22,8 @@
     <list default="true" id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="commit and push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onitama/connect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/connect/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onitama/templates/onitama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/templates/onitama/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onitama/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/onitama/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/onitama/script/command.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/command.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/onitama/script/info.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/info.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/onitama/script/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/onitama/script/websocket.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,7 +313,7 @@
       <workItem from="1603785425705" duration="3713000" />
       <workItem from="1603852570743" duration="14854000" />
       <workItem from="1603933927918" duration="6417000" />
-      <workItem from="1604020715179" duration="8725000" />
+      <workItem from="1604020715179" duration="10851000" />
     </task>
     <task id="LOCAL-00001" summary="commit and push">
       <created>1603438636237</created>
@@ -500,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603962420786</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="commit and push">
+      <created>1604042681936</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1604042681937</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,10 +588,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603953839836" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603962439373">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1604042981372">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1603962439373" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1604042981372" />
     <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

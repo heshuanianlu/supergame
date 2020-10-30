@@ -25,8 +25,9 @@ function showCards(selector,cards){
     }
     $(selector).html(htmlData);
 }
+
 function showPieces(pieces){
-    $("td").removeClass("red").removeClass("blue").removeClass("piece").text("").css("color","transparent");
+    $("tr>td").removeClass("red").removeClass("blue").removeClass("piece").text("").css("color","transparent");
     for (var i=0;i<pieces.length;i++){
         p(pieces[i].position).text(pieces[i].boss).css("color",pieces[i].color).addClass(pieces[i].color).addClass("piece");
     }
@@ -63,8 +64,8 @@ function Piece(position, color, boss='徒'){
     piece.color=color;
     piece.boss=boss;
     piece.move=function(position){
-        p(position).html(piece.boss);
-        p(piece.position).html("");
+        // p(position).html(piece.boss);
+        // p(piece.position).html("");
         piece.position=position;
     }
     return piece;

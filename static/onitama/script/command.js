@@ -1,4 +1,4 @@
-var choosedPiece=null,choosedCard=null;turn=false;
+var choosedPiece=null,choosedCard=null,turn=false;
 var zhanShi="⊙";
 
 function chooseCard(websocket){
@@ -56,18 +56,17 @@ function agref(websocket, tiv_id){
 function move(websocket){
     $(".target").click(function(){
         var position=d($(this))
-        // if (choosedCard.check(choosedPiece,position)){
+        if ($(this).hasClass("target")){
             var po=ref(choosedPiece),pn=ref(position);
             var message="#!action="
                         +room.id+"&"
                         +po[0]+""+po[1]+"&"
                         +pn[0]+""+pn[1]+"&"
                         +choosedCard.name+"!#";
-            console.log(message);
             websocket.send(message);
             // if(turn){turn=false}else{turn=true}
             choosedPiece=null;choosedCard=null;
-        // }
+        }
     })
 }
 
@@ -78,5 +77,5 @@ function ref(position){
 
 function yuan(){
     $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
-    $("tr>td").css("border-color","black");
+    $("tr>td").css("border-color","black").removeClass("target");
 }

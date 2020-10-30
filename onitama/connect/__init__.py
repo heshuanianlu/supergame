@@ -117,7 +117,6 @@ class Server(object):
                        'card': card_name,
                        'victory': ''}
             piece = room.choose(piece)
-            print('\n\n\n',piece,'\n\n\n')
             room.move(piece, position)
             room.rel_conn(card_name)
             client = [room.tiv.user, room.siv.user]
