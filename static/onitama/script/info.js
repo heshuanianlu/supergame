@@ -49,7 +49,8 @@ function Card(name, method, color){
     card.showMove=function(position){
         var result=card.getResult(position);
         for(var i=0;i<result.length;i++){
-            if(p(result[i]).text()){}else{p(result[i]).text(zhanShi).css("color",self).addClass(self).addClass("target");}
+            if(p(result[i]).text()&&p(result[i]).hasClass(self)){}
+            else{p(result[i]).text(zhanShi).css("color",self).addClass(self).addClass("target");}
         }
     }
     card.check=function(pieceP, position){

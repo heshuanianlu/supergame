@@ -56,7 +56,7 @@ function agref(websocket, tiv_id){
 function move(websocket){
     $(".target").click(function(){
         var position=d($(this))
-        if ($(this).hasClass("target")){
+        if ($(this).hasClass("target")&&choosedCard&&choosedPiece){
             var po=ref(choosedPiece),pn=ref(position);
             var message="#!action="
                         +room.id+"&"
