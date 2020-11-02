@@ -6,8 +6,6 @@
 from onitama.connect.card import Card
 from onitama.connect.piece import Piece
 from onitama.connect.player import Player
-import hashlib
-import time
 
 
 class Room(object):
@@ -15,9 +13,7 @@ class Room(object):
         """
         玩家客户端->玩家对象
         """
-        h = hashlib.md5((str(r)+str(b)).encode())
-        h.update(str(time.time()).encode())
-        self.id = h.hexdigest()[-8:]
+        self.id = b, r
 
         card_list = Card.div_card()
         self.victory = ''

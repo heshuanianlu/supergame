@@ -86,7 +86,8 @@ class Server(object):
             room = Room(self_id, user_id)
             self.room[room.id] = room
             cards = room.name()
-            message = {'command': 'agree', 'red': cards[0], 'blue': cards[1], 'id': room.id}
+            room_id = str(room.id[0]), str(room.id[1])
+            message = {'command': 'agree', 'red': cards[0], 'blue': cards[1], 'id': '+'.join(room_id)}
             return message, [user_id, self_id]
         else:
             message = {'command': 'error', 'error': '查询不到匹配信息'}
@@ -104,10 +105,11 @@ class Server(object):
             message = {'command': 'error', 'error': '查询不到匹配信息'}
             return message, [self_id]
 
-    def action(self, self_id, room_id, piece, position, card_name):
+    def action(self, self_id, room_id: str, piece: str, position: str, card_name: str):
         """移动到某个区域，需要参数房间号，点击的人，点击的位置，移动到的位置
             如果胜利，返回胜利/失败界面，并且创建返回大厅按钮"""
-        room = self.room[room_id]
+        room_id = room_id.split('+')
+        room = self.room[int(room_id[0]), int(room_id[1])]
         if self_id == room.tiv.user:
             piece = int(piece[0]), int(piece[1])
             position = int(position[0]), int(position[1])
@@ -122,7 +124,7 @@ class Server(object):
             client = [room.tiv.user, room.siv.user]
             if room.victory:
                 message['victory'] = room.victory
-                # self.ready.remove(room_id)
+                self.ready.remove(room_id)
                 del self.room[room_id]
         else:
             message = {'command': 'error', 'error': '回合判定出错'}

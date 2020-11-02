@@ -3,7 +3,7 @@ var zhanShi="⊙";
 
 function chooseCard(websocket){
     $(".card."+self).children("img:lt(2)").click(function(){
-        if(turn){
+        if(turn&&$(this)){
             $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
             $(this).css("border-color","gold").css("box-shadow","0px 0px 6px gold");
             choosedCard=room.getCard($(this).attr("name"));
@@ -14,10 +14,11 @@ function chooseCard(websocket){
 
 function choosePiece(websocket){
     $(".piece."+self).click(function(){
-        if(turn){
+        if(turn&&$(this).hasClass("piece")&&$(this).hasClass(self)){
             $("td").css("border-color","black");
             $(this).css("border-color","gold");
             choosedPiece=d($(this));
+            showPieces(room.pieceList);
             action(websocket);
         }
     })
@@ -78,4 +79,16 @@ function ref(position){
 function yuan(){
     $(".card>img").css("border-color","black").css("box-shadow","0px 0px 6px black");
     $("tr>td").css("border-color","black").removeClass("target");
+}
+
+function back(){
+    $("#back").click(function(){
+        $("#alert").html("").css("display","none");
+        $("#cont").html('<ul>'
+                        +'<li id="room"><h3 class="title">我的房间</h3><ul></ul></li>'
+                        +'<li id="xian"><h3 class="title">空闲中</h3><ul></ul></li>'
+                        +'<li id="game"><h3 class="title">游戏中</h3><ul></ul></li>'
+                        +'</ul>');
+        websocket.send('#!connect=my_id!#');
+    })
 }

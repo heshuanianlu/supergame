@@ -27,7 +27,7 @@ function showCards(selector,cards){
 }
 
 function showPieces(pieces){
-    $("tr>td").removeClass("red").removeClass("blue").removeClass("piece").text("").css("color","transparent");
+    $("td").text("").css("color","transparent").removeClass("piece").removeClass("red").removeClass("blue");
     for (var i=0;i<pieces.length;i++){
         p(pieces[i].position).text(pieces[i].boss).css("color",pieces[i].color).addClass(pieces[i].color).addClass("piece");
     }
@@ -165,7 +165,7 @@ function Room(r,b,id){
         $(".card").last().addClass(me);
         $(".card").first().addClass(an);
     }
-    room.relCoon=function(cardName,pieceP,position,victory){
+    room.relCoon=function(cardName,pieceP,position){
         if(turn){turn=false}else{turn=true}
         choosedPiece=null;choosedCard=null;
         var card=room.getCard(cardName);
@@ -183,9 +183,15 @@ function Room(r,b,id){
             room.b_cards.push(card);
             if (other){room.b_pieces.splice(oIndex,1)}
         }
-        if(victory){$("#alert").html(
-            "<h2>恭喜</h2><h2 style='color:"+self+"'>"+self+"方</h2><h2>获得胜利！</h2>"
-        )}
+    }
+    room.showVic=function(victory,websocket){
+        console.log(victory);
+        if(victory){
+            $("#alert").html("<h2>恭喜</h2><h2 style='color:"+self+"'>"
+            +self+"方</h2><h2>获得胜利！</h2><button id='back'>返回大厅</button>")
+            .css("display","block");
+            back(websocket);
+        }
     }
     room.showMap=function(){
         showCards(".red",room.r_cards);

@@ -95,8 +95,8 @@ function initEventHandle() {
                     clearInterval(clock);
                     $("#alert").html("").css("display","none");
                 }else if (command=='action'){
-                    room.relCoon(message['card'],ref(message['piece']),ref(message['position']),message['victory']);
-                    yuan();room.showMap();
+                    room.relCoon(message['card'],ref(message['piece']),ref(message['position']));
+                    yuan();room.showMap();room.showVic(message['victory'],websocket);
                     chooseCard(websocket);choosePiece(websocket);
                 }else if (command=='error'){
                     alert(message['error']);
