@@ -11,22 +11,24 @@ function createWebSocket(url) {
         } else if ('MozWebSocket' in window) {
             websocket = new MozWebSocket(url);
         } else {
-            url = "http://"+location.host+"/onitama/client";
+            url = url.replace("ws","http");
             websocket = new SockJS(url);
         }
-        initEventHandle();
+        initEventHandle(url);
     }
     catch (ex) {
-        reconnect(url);
+        url = "wss://"+location.host+"/onitama/client";
         $('#tip>p').text(ex.message);
+        reconnect(url);
     }
 }
-function initEventHandle() {
+function initEventHandle(url) {
     websocket.onclose = function (evnt) {
-        reconnect(wsUrl);
+        reconnect(url);
     };
     websocket.onerror = function (evnt) {
-        reconnect(wsUrl);
+        $('#tip>p').text(evnt.message);
+        reconnect(url);
     };
     websocket.onopen = function (evnt) {
         websocket.send('#!connect=my_id!#');
@@ -120,12 +122,12 @@ function closeWebSocket() {
 }
 
 //重新连接
-function reconnect() {
+function reconnect(url) {
     if (lockReconnect) return;
     lockReconnect = true;
     //没连接上会一直重连，设置延迟避免请求过多
     setTimeout(function () {
-        createWebSocket(wsUrl);
+        createWebSocket(url);
         lockReconnect = false;
     }, 5000);//每5秒重连一次
 }
