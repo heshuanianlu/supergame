@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d323cad4-216a-4e8e-86f8-650775cbfd9c" name="Default Changelist" comment="commit and push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uwsgi.ini" beforeDir="false" afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,6 +313,10 @@
       <workItem from="1603933927918" duration="6417000" />
       <workItem from="1604020715179" duration="11371000" />
       <workItem from="1604279117733" duration="4863000" />
+      <workItem from="1604394740147" duration="190000" />
+      <workItem from="1604468583781" duration="13000" />
+      <workItem from="1604624857748" duration="34000" />
+      <workItem from="1604970775031" duration="143000" />
     </task>
     <task id="LOCAL-00001" summary="commit and push">
       <created>1603438636237</created>
@@ -544,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604291887257</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="commit and push">
+      <created>1604394749957</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1604394749957</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,10 +644,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="270" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603953839836" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1604291892103">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1604394751928">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1604291892103" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1604394751928" />
     <state x="573" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603417181641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
